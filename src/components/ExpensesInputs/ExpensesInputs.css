@@ -24,3 +24,9 @@
 .dropdown-toggle::after{
     margin-left: 4.2em !important;
 }
+
+.add-button{
+    height: 30px;
+    --bs-btn-padding-y: 0 !important;
+    margin-top: 10px;
+}
