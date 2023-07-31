@@ -1,0 +1,26 @@
+.expenses-inputs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 50px;
+}
+
+.incomes-label, .expenses-label, .expenses-dropdown, .incomes-dropdown, .name, .date{
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+    min-width: 10rem;
+}
+
+#expenses, #incomes, #expenses-dropdown, #incomes-dropdown, #name, #date{
+    margin: 0.4rem 0;
+    border-radius: 0.375rem;
+}
+
+.btn-secondary{
+    --bs-btn-color: #5c636a !important;
+    --bs-btn-bg: #fff !important;
+}
+
+.dropdown-toggle::after{
+    margin-left: 4.2em !important;
+}
