@@ -2,6 +2,7 @@ import React, { useState, useRef} from "react";
 import "./Inputs.css";
 import IncomesTable from "../incomesTable/IncomesTable";
 import ExpensesTable from "../expensesTable/ExpensesTable";
+import SearchComponent from "../searchComponent/SearchComponent";
 
 const Inputs = () => {
   const expensesRef = useRef(null);
@@ -68,24 +69,31 @@ const Inputs = () => {
 
       localStorage.setItem("incomesList", JSON.stringify(updatedIncomesList));
       setIncomesList(updatedIncomesList);
+
+      form.elements.incomes.value = '';
+      form.elements.name.value = '';
+      form.elements.date.value = '';
+      setSelectedIncomesValue('Choose');
     }
   };
 
   return (
     <div>
+    <div className="inputs-wrapper">
       <form className="expenses-inputs">
         <div>
           <label className="expenses-label" htmlFor="expenses">
             Expenses:
           </label>
-          <input id="expenses" name="expenses" type="number"></input>
+          <input id="expenses" name="expenses" type="number" required placeholder="Enter value" />
         </div>
 
         <div className="dropdown">
           <label className="expenses-dropdown" htmlFor="expenses-dropdown">
             Types of expenses:
           </label>
-          <button
+          <button required
+          placeholder="Choose"
             id="expenses-dropdown"
             ref={expensesRef}
             className="btn btn-secondary dropdown-toggle expenses-dropdown"
@@ -165,7 +173,7 @@ const Inputs = () => {
         <div className="add-button">
           <button
             type="button"
-            className="btn btn-success"
+            className="btn btn-info"
             onClick={handleAddExpenses}
           >
             Add Expenses
@@ -178,7 +186,7 @@ const Inputs = () => {
           <label className="incomes-label" htmlFor="incomes">
             Incomes:
           </label>
-          <input id="incomes" name="incomes" type="number"></input>
+          <input id="incomes" name="incomes" type="number" placeholder="Enter value"></input>
         </div>
 
         <div className="dropdown">
@@ -245,7 +253,7 @@ const Inputs = () => {
         <div className="add-button">
           <button
             type="button"
-            className="btn btn-success"
+            className="btn btn-info"
             onClick={handleAddIncomes}
           >
             Add Incomes
@@ -253,8 +261,14 @@ const Inputs = () => {
         </div>
       </form>
 
+      </div>
+
+
+      <SearchComponent expensesList={expensesList} incomesList={incomesList}/>
+      <div className="all-tables">
       <ExpensesTable expensesList={expensesList} setExpensesList={setExpensesList} />
       <IncomesTable incomesList={incomesList} setIncomesList={setIncomesList}/>
+      </div>
     </div>
   );
 };

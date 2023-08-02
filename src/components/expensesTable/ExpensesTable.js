@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react'
+import React, {useEffect} from 'react';
+import './ExpensesTable.css'
 
 const ExpensesTable = ({expensesList, setExpensesList}) => {
 
@@ -11,8 +12,9 @@ const ExpensesTable = ({expensesList, setExpensesList}) => {
 
       const totalExpenses = expensesList.reduce((sum, item) => sum + parseFloat(item.expenses), 0);
 
+
   return (
-    <div>
+    <div className='expenses-table'>
         <h4>Expenses Table</h4>
         <table className="table">
   <thead>
@@ -20,7 +22,7 @@ const ExpensesTable = ({expensesList, setExpensesList}) => {
       <th scope="col">#</th>
       <th scope="col">Type of Expense</th>
       <th scope="col">Name of Expense</th>
-      <th scope="col">Amount </th>
+      <th scope="col">Value </th>
       <th scope="col">Date </th>
     </tr>
   </thead>
@@ -33,9 +35,10 @@ const ExpensesTable = ({expensesList, setExpensesList}) => {
       <td>{item.date}</td>
     </tr>
   ))}
-   <div>Total: {totalExpenses}</div>
+   
   </tbody>
 </table>
+<h5 className='expenses-total'>Total: {totalExpenses}</h5>
     </div>
   )
 }
