@@ -6,6 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import Balance from './components/Balance/Balance';
 import { useEffect, useState } from 'react';
 
+
 library.add();
 
 function App() {
