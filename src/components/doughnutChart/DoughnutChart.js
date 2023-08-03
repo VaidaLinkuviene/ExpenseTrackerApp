@@ -1,8 +1,11 @@
-// import React, { useEffect, useRef } from 'react';
-// import { Doughnut } from 'react-chartjs-2';
+import React, {  useRef } from 'react';
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
-// const DoughnutChart = ({ data }) => {
-//   const chartRef = useRef(null);
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const DoughnutChart = ({ data }) => {
+  const chartRef = useRef(null);
 
 //   useEffect(() => {
 //     if (chartRef.current) {
@@ -10,12 +13,12 @@
 //     }
 //   }, [data]);
 
-//   const options = {
-//     maintainAspectRatio: false,
-//     responsive: true,
-//   };
+  const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+  };
 
-//   return <Doughnut ref={chartRef} data={data} options={options} />;
-// };
+  return <Doughnut ref={chartRef} data={data} options={options} />;
+};
 
-// export default DoughnutChart;
+export default DoughnutChart;
