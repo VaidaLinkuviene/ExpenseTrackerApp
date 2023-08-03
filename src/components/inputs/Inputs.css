@@ -1,8 +1,12 @@
-.expenses-inputs{
+.inputs-wrapper{
+    background-color: #e4ebf4;
+}
+
+.expenses-inputs, .incomes-inputs{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 20px 50px;
+    padding: 20px 50px;
 }
 
 .incomes-label, .expenses-label, .expenses-dropdown, .incomes-dropdown, .name, .date{
@@ -14,6 +18,8 @@
 #expenses, #incomes, #expenses-dropdown, #incomes-dropdown, #name, #date{
     margin: 0.4rem 0;
     border-radius: 0.375rem;
+    border-width: 2px;
+    height: 2.5rem;
 }
 
 .btn-secondary{
@@ -23,4 +29,15 @@
 
 .dropdown-toggle::after{
     margin-left: 4.2em !important;
+}
+
+.add-button{
+    height: 30px;
+    --bs-btn-padding-y: 0 !important;
+    margin-top: 20px;
+}
+
+.all-tables{
+    background: url("../../../images/money.avif") no-repeat center center ;
+    background-size: cover;
 }
