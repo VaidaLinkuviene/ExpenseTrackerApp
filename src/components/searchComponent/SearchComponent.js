@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo } from "react";
 import './SearchComponent.css';
 
 const SearchComponent = ({ incomesList, expensesList }) => {
@@ -13,7 +13,8 @@ const SearchComponent = ({ incomesList, expensesList }) => {
       item.selectedExpensesValue?.toLowerCase().includes(query.toLowerCase())
     );
   });
-}, [list, query])
+
+}, [query])
 
 
   return (
@@ -34,7 +35,7 @@ const SearchComponent = ({ incomesList, expensesList }) => {
       <>
           <h4>Search results: </h4>
           {filteredItems.map((item) => (
-            <div>
+            <div key = {item.id}>
               <i>Value:</i> <b>{item.incomes} {item.expenses} Eur</b> | <i>Type:</i> <b> {item.selectedIncomesValue} {item.selectedExpensesValue}</b> | <i>Name:</i>  <b>{item.name}</b> | <i>Date:</i> <b>{item.date}</b>
             </div>
           ))}
