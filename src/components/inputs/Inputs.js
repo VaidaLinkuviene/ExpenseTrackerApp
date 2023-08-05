@@ -1,8 +1,7 @@
-import React, { useState, useRef} from "react";
+import React, { useState, useRef, useEffect} from "react";
 import "./Inputs.css";
-import IncomesTable from "../incomesTable/IncomesTable";
-import ExpensesTable from "../expensesTable/ExpensesTable";
 import SearchComponent from "../searchComponent/SearchComponent";
+import MainTable from "../mainTable/MainTable";
 
 const Inputs = () => {
   const expensesRef = useRef(null);
@@ -12,7 +11,20 @@ const Inputs = () => {
   const [selectedIncomesValue, setSelectedIncomesValue] = useState("Choose");
   const [expensesList, setExpensesList] = useState([]);
   const [incomesList, setIncomesList] = useState([]);
+  const [filteredMainTableList, setFilteredMainTableList] =useState([]);
 
+
+    useEffect(() => {
+      const storedExpensesList = JSON.parse(localStorage.getItem("expensesList"));
+      const storedIncomesList = JSON.parse(localStorage.getItem("incomesList"));
+      if (storedExpensesList) {
+        setExpensesList(storedExpensesList);
+      }
+      if (storedIncomesList) {
+        setIncomesList(storedIncomesList);
+      }
+      setFilteredMainTableList([...storedExpensesList, ...storedIncomesList]);
+    }, []);
 
   const handleExpensesItemClick = (event, value) => {
     event.preventDefault();
@@ -45,6 +57,7 @@ const Inputs = () => {
 
       localStorage.setItem("expensesList", JSON.stringify(updatedExpensesList));
       setExpensesList(updatedExpensesList);
+      setFilteredMainTableList([...filteredMainTableList, newExpensesList]);
     }
     }
 
@@ -69,6 +82,7 @@ const Inputs = () => {
 
       localStorage.setItem("incomesList", JSON.stringify(updatedIncomesList));
       setIncomesList(updatedIncomesList);
+      setFilteredMainTableList([...filteredMainTableList, newIncomesList]);
 
       form.elements.incomes.value = '';
       form.elements.name.value = '';
@@ -76,6 +90,24 @@ const Inputs = () => {
       setSelectedIncomesValue('Choose');
     }
   };
+
+  const handleFilterMainTable = (searchQuery, expensesList, incomesList) => {
+    const filteredExpenses = expensesList.filter((item) => {
+      return (
+        item.selectedExpensesValue?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    });
+
+    const filteredIncomes = incomesList.filter((item) => {
+      return (
+        item.selectedIncomesValue?.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    });
+
+    const filteredItems = [...filteredExpenses, ...filteredIncomes];
+    setFilteredMainTableList(filteredItems);
+  };
+
 
   return (
     <div>
@@ -264,10 +296,9 @@ const Inputs = () => {
       </div>
 
 
-      <SearchComponent expensesList={expensesList} incomesList={incomesList}/>
+      <SearchComponent expensesList={expensesList} incomesList={incomesList} onFilter={handleFilterMainTable}/>
       <div className="all-tables">
-      <ExpensesTable expensesList={expensesList} setExpensesList={setExpensesList} />
-      <IncomesTable incomesList={incomesList} setIncomesList={setIncomesList}/>
+      <MainTable data={filteredMainTableList} setFilteredMainTableList={setFilteredMainTableList}/>
       </div>
     </div>
   );
