@@ -1,0 +1,8 @@
+.reusable-button{
+    background-color: #78aed3;
+    border: 1px solid black;
+    height: 35px;
+    border-radius: 5px;
+    margin-top: 3px;
+    font-weight: 400;
+}

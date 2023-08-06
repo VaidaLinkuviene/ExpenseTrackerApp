@@ -1,0 +1,9 @@
+.balance-value{
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.balance{
+    display: inline-block;
+    margin: 20px 50px;
+}

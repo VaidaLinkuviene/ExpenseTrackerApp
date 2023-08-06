@@ -7,7 +7,7 @@ const SearchComponent = ({ expensesList, incomesList, onFilter }) => {
   const handleSearch = (event) => {
     const searchQuery = event.target.value;
     setQuery(searchQuery);
-    onFilter(searchQuery, expensesList, incomesList); // Call the callback function with the search query
+    onFilter(searchQuery, expensesList, incomesList);
   };
 
 
