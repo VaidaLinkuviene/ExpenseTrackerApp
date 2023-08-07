@@ -67,7 +67,7 @@ const Inputs = ({incomesList, setIncomesList, expensesList, setExpensesList}) =>
     if (inputValidation(expensesInputValue) && nameValidation(nameInputValue)) {
       const newExpensesList = {
         expenses: expensesInputValue,
-        selectedExpensesValue,
+        selectedExpensesValue: selectedExpensesValue,
         name: nameInputValue,
         date: dateValue,
       };
@@ -83,7 +83,7 @@ const Inputs = ({incomesList, setIncomesList, expensesList, setExpensesList}) =>
       form.elements.date.value = "";
       setSelectedExpensesValue("Choose");
     }
-  }, [expensesList]);
+  }, [expensesList, selectedExpensesValue]);
 
   const handleAddIncomes = useCallback( (event) => {
     event.preventDefault();
@@ -95,7 +95,7 @@ const Inputs = ({incomesList, setIncomesList, expensesList, setExpensesList}) =>
     if (inputValidation(incomesInputValue, "incomes")) {
       const newIncomesList = {
         incomes: incomesInputValue,
-        selectedIncomesValue,
+        selectedIncomesValue: selectedIncomesValue,
         name: nameInputValue,
         date: dateValue,
       };
@@ -111,7 +111,7 @@ const Inputs = ({incomesList, setIncomesList, expensesList, setExpensesList}) =>
       form.elements.date.value = "";
       setSelectedIncomesValue("Choose");
     }
-  }, [incomesList]);
+  }, [incomesList, selectedIncomesValue]);
 
   const handleFilterMainTable = (searchQuery, expensesList, incomesList) => {
     const filteredExpenses = expensesList.filter((item) => {
