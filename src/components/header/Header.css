@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Borel&family=Pacifico&display=swap');
 .header-wrapper {
-  position: fixed;
+  /* position: fixed; */
   height: 3rem;
   width: 100vw;
   /* background: rgb(255, 255, 255); */
