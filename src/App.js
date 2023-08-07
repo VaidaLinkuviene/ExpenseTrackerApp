@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import Inputs from './components/inputs/Inputs';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -28,7 +29,8 @@ function App() {
       <Balance incomesList={incomesList} expensesList={expensesList}/>
       <Inputs incomesList={incomesList} setIncomesList={setIncomesList} expensesList={expensesList} setExpensesList={setExpensesList}/>
     </div>
-  );
+  </ThemeProvider>
+);
 }
 
 export default App;
