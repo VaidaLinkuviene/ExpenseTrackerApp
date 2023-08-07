@@ -3,13 +3,14 @@
   position: fixed;
   height: 3rem;
   width: 100vw;
-  background: rgb(157, 69, 220);
+  /* background: rgb(255, 255, 255); */
   /* opacity: 0.3; */
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   z-index: 1;
   font-family: 'Pacifico', cursive;
   align-items: center;
+  padding: 0 10px 0 10px;
 }
 header{
   display: flex;

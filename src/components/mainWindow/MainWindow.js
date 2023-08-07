@@ -13,7 +13,7 @@ const MainWindow = () => {
       //   background:
       //     'url("../../../images/light-background.jpeg") no-repeat center -100px fixed',
       //   backgroundSize: "cover",
-      background: "#b5aa9d",
+      backgroundColor: "#E0DECA",
       color: "#333333",
       transition: "0.3s",
     },
@@ -26,10 +26,23 @@ const MainWindow = () => {
       transition: "0.3s",
     },
   };
-  console.log(GlobalStyles);
+
+  const headerStyles = {
+light: {
+  background: "#ffffff",
+      color: "#333333",
+      transition: "0.3s",
+},
+
+dark: {
+  backgroundColor: "#353540",
+      color: "#ffffff",
+}
+  }
+  
   return (
     <div className="MainWindow" style={{ ...GlobalStyles[theme] }}>
-      <Header />
+      <Header style={{ ...headerStyles[theme] }}/>
       <ChartWrapper />
       <Inputs />
     </div>
