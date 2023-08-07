@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Borel&family=Pacifico&display=swap');
+.header-wrapper {
+  position: fixed;
+  height: 3rem;
+  width: 100vw;
+  background: rgb(157, 69, 220);
+  /* opacity: 0.3; */
+  display: flex;
+  justify-content: space-around;
+  z-index: 1;
+  font-family: 'Pacifico', cursive;
+  align-items: center;
+}
+header{
+  display: flex;
+  justify-items: space-between;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.HeaderContent {
+    display: flex;
+    gap: 10rem;
+    
+   
+  }
+  
+  .HeaderContent input {
+    background-color: #dcdbda;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-size: 12px;
+    padding: 8px;
+    height: 15px;
+    width: 200px;
+    border-radius: 6px;
+    transition: 0.3s;
+  }
+  
+  .searchButton {
+    background-color: #dcdbda;
+    border: none;
+    outline: none;
+    margin-left: -33px;
+    cursor: pointer;
+  }
+  
+  .svg-inline--fa {
+    background-color: transparent;
+  }
+  
+  .searchInput input:focus {
+    outline: none;
+    background-color: white;
+  }
+  
+  .searchInput input:hover {
+    background-color: white;
+    transition: 0.3s;
+  }
+  
+  h1 {
+    color: rgb(100, 27, 169);
+  }

@@ -1,5 +1,6 @@
 .inputs-wrapper{
-    background-color: #e4ebf4;
+    /* background-color: #e4ebf4; */
+    
 }
 
 .expenses-inputs, .incomes-inputs{
@@ -38,6 +39,7 @@
 }
 
 .all-tables{
-    background: url("../../../images/money.avif") no-repeat center center ;
-    background-size: cover;
+    /* background: url("../../../images/money.avif") no-repeat center center ;
+    background-size: cover; */
+   
 }
