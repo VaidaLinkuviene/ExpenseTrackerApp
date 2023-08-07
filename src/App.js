@@ -29,7 +29,7 @@ function App() {
       <Balance incomesList={incomesList} expensesList={expensesList}/>
       <Inputs incomesList={incomesList} setIncomesList={setIncomesList} expensesList={expensesList} setExpensesList={setExpensesList}/>
     </div>
-  </ThemeProvider>
+  // </ThemeProvider>
 );
 }
 
