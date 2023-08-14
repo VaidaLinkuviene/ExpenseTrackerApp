@@ -1,14 +1,49 @@
 import { ThemeContext } from "../themeProvider/ThemeContext";
 import Header from "../header/Header";
 import Inputs from "../inputs/Inputs";
-import ChartWrapper from "../chartWrapper/ChartWrapper";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useReducer } from "react";
 import "./MainWindow.css";
 import Balance from "../Balance/Balance";
-// import {Routes, Route} from "react-router-dom";
+import axios from "axios";
+import MainTable from "../mainTable/MainTable";
+
+const initialState = {
+  isLoading: false,
+  data: [],
+  error: "",
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "LOADING":
+      return { ...state, isLoading: true };
+    case "SUCCESS":
+      return { ...state, data: action.payload, isLoading: false };
+    case "FAILURE":
+      return { ...state, error: action.payload, isLoading: false };
+    default:
+      return state;
+  }
+};
 
 const MainWindow = () => {
   const { theme } = useContext(ThemeContext);
+
+  const [items, dispatch] = useReducer(reducer, initialState);
+
+  const handleFetch = async () => {
+    dispatch({ type: "LOADING" });
+    try {
+      const response = await axios.get("http://localhost:3001/expense");
+      dispatch({ type: "SUCCESS", payload: response.data });
+    } catch (err) {
+      dispatch({ type: "FAILURE", payload: err.message });
+    }
+  };
+
+  useEffect(() => {
+    handleFetch();
+  }, []);
 
   const GlobalStyles = {
     light: {
@@ -36,33 +71,26 @@ const MainWindow = () => {
     },
   };
 
-  const [incomesList, setIncomesList] = useState([]);
-  const [expensesList, setExpensesList] = useState([]);
+  if (items.isLoading) {
+    return "Loading...";
+  }
 
-  useEffect(() => {
-    const storedExpensesList =
-      JSON.parse(localStorage.getItem("expensesList")) || [];
-    const storedIncomesList =
-      JSON.parse(localStorage.getItem("incomesList")) || [];
-
-    setExpensesList(storedExpensesList);
-
-    setIncomesList(storedIncomesList);
-  }, []);
+  if (items.error) {
+    return <p>{items.error}</p>;
+  }
 
   return (
     <div className="MainWindow" style={{ ...GlobalStyles[theme] }}>
-      <Header style={{ ...headerStyles[theme] }} /> 
-      <Balance incomesList={incomesList} expensesList={expensesList} />
-      <ChartWrapper />
-      <Inputs showSearch={true} 
-      showMainTable={false}
-        incomesList={incomesList}
-        setIncomesList={setIncomesList}
-        expensesList={expensesList}
-        setExpensesList={setExpensesList}
+      <Header style={{ ...headerStyles[theme] }} />
+      <Balance expensesList={items?.data} />
+      <Inputs
+        showMainTable={true}
+        // incomesList={incomesList}
+        // setIncomesList={setIncomesList}
+        expensesList={items?.data}
+        // setExpensesList={setExpensesList}
       />
-     
+      <MainTable data={items?.data} showSearch={true} />
     </div>
   );
 };

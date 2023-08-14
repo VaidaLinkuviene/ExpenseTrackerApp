@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import "./SearchComponent.css";
 
-const SearchComponent = ({ expensesList, incomesList, onFilter }) => {
+const SearchComponent = ({ expensesList, onFilter }) => {
   const [query, setQuery] = useState("");
 
   const handleSearch = (event) => {
     const searchQuery = event.target.value;
     setQuery(searchQuery);
-    onFilter(searchQuery, expensesList, incomesList);
+    onFilter(searchQuery, expensesList);
   };
 
   
   return (
     <div className="search-wrapper">
-      <h3 className="search-name">Search</h3>
       <input
         className="search-input"
         value={query}

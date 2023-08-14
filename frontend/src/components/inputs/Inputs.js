@@ -1,152 +1,61 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import "./Inputs.css";
-import SearchComponent from "../searchComponent/SearchComponent";
-import MainTable from "../mainTable/MainTable";
 import Button from "../../reusableComponents/button/Button";
+import axios from "axios";
 
-const Inputs = ({
-  incomesList,
-  setIncomesList,
-  expensesList,
-  setExpensesList,
-  showSearch,
-}) => {
+const Inputs = () => {
   const expensesRef = useRef(null);
   const incomesRef = useRef(null);
   const calendarRef = useRef(null);
 
   const [selectedExpensesValue, setSelectedExpensesValue] = useState("Choose");
   const [selectedIncomesValue, setSelectedIncomesValue] = useState("Choose");
-  const [filteredMainTableList, setFilteredMainTableList] = useState([]);
-  const [expensesError, setExpensesError] = useState("");
-  const [nameError, setNameError] = useState("");
+  const [expenseInputFields, setExpenseInputFields] = useState({
+    expense: null,
+    type: '',
+    name: '',
+    date: new Date()
+  })
 
-  useEffect(() => {
-    const storedExpensesList =
-      JSON.parse(localStorage.getItem("expensesList")) || [];
-    const storedIncomesList =
-      JSON.parse(localStorage.getItem("incomesList")) || [];
-
-    setExpensesList(storedExpensesList);
-
-    setIncomesList(storedIncomesList);
-
-    setFilteredMainTableList([...storedExpensesList, ...storedIncomesList]);
-  }, []);
-
-  const handleExpensesItemClick = (event, value) => {
-    event.preventDefault();
-    setSelectedExpensesValue(value);
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setExpenseInputFields((pre) => {
+      return {...pre, [name]:value};
+    });
   };
 
-  const handleIncomesItemClick = (event, value) => {
-    event.preventDefault();
+  const handleExpensesItemClick = (value) => {
+    setSelectedExpensesValue(value);
+    setExpenseInputFields((prevFields) => ({
+      ...prevFields,
+      type: value
+    }));
+  };
+
+  const handleIncomesItemClick = (value) => {
     setSelectedIncomesValue(value);
   };
 
-  const inputValidation = (inputValue) => {
-    const isValid = !isNaN(inputValue) && inputValue !== "";
-    if (!isValid) {
-      setExpensesError("Field is required");
-    } else {
-      setExpensesError("");
-    }
-    return isValid;
+  const handleDateChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setExpenseInputFields((prevFields) => ({
+      ...prevFields,
+      [name]: value
+    }));
   };
 
-  const nameValidation = (name) => {
-    const isValid = name.trim() !== "";
-    if (!isValid) {
-      setNameError("Field is required");
-    } else {
-      setNameError("");
+  const handleAddExpenses = async () => {
+    try {
+      const postData = await axios.post(
+        "http://localhost:3001/expense/sendData",
+        expenseInputFields
+      );
+      console.log(postData);
+    } catch (err) {
+      console.log(err);
     }
-    return isValid;
-  };
-
-  const handleAddExpenses = useCallback(
-    (event) => {
-      event.preventDefault();
-      const form = event.target.closest("form");
-      const expensesInputValue = form.elements.expenses.value;
-      const nameInputValue = form.elements.name.value;
-      const dateValue = form.elements.date.value;
-
-      if (
-        inputValidation(expensesInputValue) &&
-        nameValidation(nameInputValue)
-      ) {
-        const newExpensesList = {
-          expenses: expensesInputValue,
-          selectedExpensesValue: selectedExpensesValue,
-          name: nameInputValue,
-          date: dateValue,
-        };
-
-        const updatedExpensesList = [...expensesList, newExpensesList];
-
-        localStorage.setItem(
-          "expensesList",
-          JSON.stringify(updatedExpensesList)
-        );
-        setExpensesList(updatedExpensesList);
-        setFilteredMainTableList([...filteredMainTableList, newExpensesList]);
-
-        form.elements.expenses.value = "";
-        form.elements.name.value = "";
-        form.elements.date.value = "";
-        setSelectedExpensesValue("Choose");
-      }
-    },
-    [expensesList, selectedExpensesValue]
-  );
-
-  const handleAddIncomes = useCallback(
-    (event) => {
-      event.preventDefault();
-      const form = event.target.closest("form");
-      const incomesInputValue = form.elements.incomes.value;
-      const nameInputValue = form.elements.name.value;
-      const dateValue = form.elements.date.value;
-
-      if (inputValidation(incomesInputValue, "incomes")) {
-        const newIncomesList = {
-          incomes: incomesInputValue,
-          selectedIncomesValue: selectedIncomesValue,
-          name: nameInputValue,
-          date: dateValue,
-        };
-
-        const updatedIncomesList = [...incomesList, newIncomesList];
-
-        localStorage.setItem("incomesList", JSON.stringify(updatedIncomesList));
-        setIncomesList(updatedIncomesList);
-        setFilteredMainTableList([...filteredMainTableList, newIncomesList]);
-
-        form.elements.incomes.value = "";
-        form.elements.name.value = "";
-        form.elements.date.value = "";
-        setSelectedIncomesValue("Choose");
-      }
-    },
-    [incomesList, selectedIncomesValue]
-  );
-
-  const handleFilterMainTable = (searchQuery, expensesList, incomesList) => {
-    const filteredExpenses = expensesList.filter((item) => {
-      return item.selectedExpensesValue
-        ?.toLowerCase()
-        .includes(searchQuery.toLowerCase());
-    });
-
-    const filteredIncomes = incomesList.filter((item) => {
-      return item.selectedIncomesValue
-        ?.toLowerCase()
-        .includes(searchQuery.toLowerCase());
-    });
-
-    const filteredItems = [...filteredExpenses, ...filteredIncomes];
-    setFilteredMainTableList(filteredItems);
   };
 
   return (
@@ -159,13 +68,12 @@ const Inputs = ({
             </label>
             <input
               id="expenses"
-              name="expenses"
+              name="expense"
               placeholder="Enter value"
               type="number"
-            />
-            {expensesError && (
-              <div className="error-message">{expensesError}</div>
-            )}
+              onChange={handleChange}
+              value={expenseInputFields.expense}
+            ></input>
           </div>
 
           <div className="dropdown">
@@ -188,7 +96,7 @@ const Inputs = ({
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={(e) => handleExpensesItemClick(e, "Food")}
+                  onClick={() => handleExpensesItemClick("Food")}
                 >
                   Food
                 </a>
@@ -198,7 +106,7 @@ const Inputs = ({
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={(e) => handleExpensesItemClick(e, "Clothes")}
+                  onClick={() => handleExpensesItemClick("Clothes")}
                 >
                   Clothes
                 </a>
@@ -208,7 +116,7 @@ const Inputs = ({
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={(e) => handleExpensesItemClick(e, "Transport")}
+                  onClick={() => handleExpensesItemClick("Transport")}
                 >
                   Transport
                 </a>
@@ -218,7 +126,7 @@ const Inputs = ({
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={(e) => handleExpensesItemClick(e, "Medicine")}
+                  onClick={() => handleExpensesItemClick( "Medicine")}
                 >
                   Medicine
                 </a>
@@ -228,7 +136,7 @@ const Inputs = ({
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={(e) => handleExpensesItemClick(e, "Entertainments")}
+                  onClick={() => handleExpensesItemClick("Entertainments")}
                 >
                   Entertainments
                 </a>
@@ -245,16 +153,15 @@ const Inputs = ({
               name="name"
               type="text"
               placeholder="Enter name"
+              onChange={handleChange}
             ></input>
-            {nameError && <div className="error-message">{nameError}</div>}
           </div>
 
           <div>
             <label className="date" htmlFor="date">
               Date:
             </label>
-            <input ref={calendarRef} id="date" name="date" type="date"></input>
-            {/* {errorMessage && <div className="error-message">{errorMessage}</div>} */}
+            <input ref={calendarRef} id="date" name="date" type="date" onChange={handleDateChange} value={expenseInputFields.date}></input>
           </div>
 
           <div className="add-button">
@@ -294,7 +201,7 @@ const Inputs = ({
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={(e) => handleIncomesItemClick(e, "Salary")}
+                  onClick={() => handleIncomesItemClick("Salary")}
                 >
                   Salary
                 </a>
@@ -304,7 +211,7 @@ const Inputs = ({
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={(e) => handleIncomesItemClick(e, "Gift")}
+                  onClick={() => handleIncomesItemClick("Gift")}
                 >
                   Gift
                 </a>
@@ -314,7 +221,7 @@ const Inputs = ({
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={(e) => handleIncomesItemClick(e, "Winning")}
+                  onClick={() => handleIncomesItemClick("Winning")}
                 >
                   Winning
                 </a>
@@ -342,21 +249,9 @@ const Inputs = ({
           </div>
 
           <div className="add-button">
-            <Button handleClick={handleAddIncomes}>Add Incomes</Button>
+            <Button>Add Incomes</Button>
           </div>
         </form>
-      </div>
-
-      {showSearch && <SearchComponent
-        expensesList={expensesList}
-        incomesList={incomesList}
-        onFilter={handleFilterMainTable}
-      />}
-     <div className="all-tables">
-        <MainTable
-          data={filteredMainTableList}
-          setFilteredMainTableList={setFilteredMainTableList}
-        />
       </div>
     </div>
   );

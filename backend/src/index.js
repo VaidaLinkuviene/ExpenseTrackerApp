@@ -1,6 +1,5 @@
 import express from 'express';
 import mongoose from 'mongoose';
-// import expenseModel from '../models/ExpenseModel.js';
 import expenseRoute from "../routes/ExpenseRoute.js"
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -22,17 +21,6 @@ const connectionToDB = async() => {
         console.log(error)
     }
 };
-
-// app.get('/', async (req, res) =>{
-//    const allExpenses = await expenseModel.find({});
-//    res.json(allExpenses);
-// });
-
-// app.post('/', async (req, res) =>{
-//     const sendData = new expenseModel(req.body);
-//     const data = await sendData.save();
-//     res.status(201).send(data);
-//  });
 
 app.listen(3001, ()=>{
     connectionToDB();

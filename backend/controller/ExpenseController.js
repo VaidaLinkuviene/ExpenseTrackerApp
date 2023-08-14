@@ -1,4 +1,3 @@
-import ExpenseModel from '../models/ExpenseModel.js';
 import expenseModel from '../models/ExpenseModel.js'
 
 const getAllExpenses = async (req, res) => {
