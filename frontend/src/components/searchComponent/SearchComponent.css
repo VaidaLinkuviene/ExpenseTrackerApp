@@ -1,0 +1,25 @@
+.search-wrapper{
+  border: none;
+  padding: 0;
+  /* margin-bottom: 50px; */
+}
+
+.search-input{
+  margin-top: 50px;
+    margin-bottom: 25px;
+    background: transparent url("../../../images/magnifying-glass-solid.svg") no-repeat left;
+    width: 200px;
+  border: 1px solid #555;
+  display: block;
+  padding: 9px 4px 9px 40px;
+  background-size: 23px;
+  background-position: 3% center;
+  border-width: 2px;
+  height: 35px;
+}
+
+.search-results{
+    margin-left: 50px;
+    margin-bottom: 50px;
+    font-size: 20px;
+}

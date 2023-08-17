@@ -1,0 +1,30 @@
+.expenses-table{
+    display: block;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    opacity: 0.85;
+}
+
+.expenses-total{
+    float: right;
+}
+
+.lightgreen-row{
+    color: Black !important;
+}
+
+.pink-row {
+    color: red !important;
+  }
+
+  .table{
+    --bs-table-color: none !important
+  }
+
+  .delete-button{
+    color: red;
+    border: none;
+    background: none;
+  }
+  
