@@ -49,7 +49,7 @@
     font-size: 12px;
   }
 
-  .error-border{
+  .validation-error{
     border: 1px solid red;
   }
   

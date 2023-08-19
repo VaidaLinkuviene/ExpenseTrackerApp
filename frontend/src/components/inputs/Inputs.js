@@ -3,6 +3,8 @@ import "./Inputs.css";
 import Button from "../../reusableComponents/button/Button";
 import axios from "axios";
 
+
+
 const Inputs = () => {
   const expensesRef = useRef(null);
   const incomesRef = useRef(null);
@@ -11,11 +13,11 @@ const Inputs = () => {
   const [selectedExpensesValue, setSelectedExpensesValue] = useState("Choose");
   const [selectedIncomesValue, setSelectedIncomesValue] = useState("Choose");
   const [expenseInputFields, setExpenseInputFields] = useState({
-    expense: null,
+    expense: '',
     type: '',
     name: '',
     date: new Date()
-  })
+  })  
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -47,7 +49,39 @@ const Inputs = () => {
   };
 
   const handleAddExpenses = async () => {
-    try {
+
+    // const inputNameValue = document.getElementById("name");
+    // const dropdownExpense = document.getElementById("expenses-dropdown");
+    // const expenseInputValue = document.getElementById("expenses");
+
+    // let formIsValid = true;
+    // if (inputNameValue.value === '') {
+    //   formIsValid = false;
+    //   setIsNameValid(false);
+    // } else {
+    //   setIsNameValid(true);
+    // }
+  
+    // if (expenseInputValue.value === '' || expenseInputValue.value == null) {
+    //   formIsValid = false;
+    //   setIsExpenseValid(false);
+    // } else {
+    //   setIsExpenseValid(true);
+    // }
+  
+    // if (dropdownExpense.value === '') {
+    //   formIsValid = false;
+    //   setIsDropdownValid(false);
+    // } else {
+    //   setIsDropdownValid(true);
+    // }
+    //   if(formIsValid){
+    //   inputNameValue.classList.remove("validation-error");
+    //   dropdownExpense.classList.remove("validation-error");
+    //   expenseInputValue.classList.remove("validation-error");
+
+
+      try {
       const postData = await axios.post(
         "http://localhost:3001/expense/sendData",
         expenseInputFields
@@ -56,7 +90,8 @@ const Inputs = () => {
     } catch (err) {
       console.log(err);
     }
-  };
+  }
+  // }
 
   return (
     <div>
@@ -73,6 +108,7 @@ const Inputs = () => {
               type="number"
               onChange={handleChange}
               value={expenseInputFields.expense}
+              // className={isExpenseValid ? '' : 'validation-error'}
             ></input>
           </div>
 
@@ -154,6 +190,7 @@ const Inputs = () => {
               type="text"
               placeholder="Enter name"
               onChange={handleChange}
+              // className={isNameValid ? '' : 'validation-error'}
             ></input>
           </div>
 
