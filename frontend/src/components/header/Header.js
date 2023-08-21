@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import Toggle from "../toggle/Toggle";
 import "./Header.css";
+import { ThemeContext } from "../themeProvider/ThemeContext";
+
 
 const Header = () => {
+  const { theme } = useContext(ThemeContext);
+  
   return (
-    <div className="header">
+    <div className={`header ${theme}`}>
       <div className="header-wrapper">
         <div>
           <h2>My Expense Tracker</h2>{" "}

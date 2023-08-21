@@ -1,0 +1,34 @@
+.left-div {
+  width: 10%;
+  height: 100vh; /* 100% height of the viewport */
+  background-color: #f5fcff; /* Background color for the space */
+  float: left; /* Float the space to the left */
+}
+
+.side-expenses {
+  margin-top: 20%;
+  margin-left: 15%;
+  margin-bottom: 5%;
+}
+
+.side-incomes {
+  margin-left: 15%;
+  margin-bottom: 5%;
+}
+
+a:-webkit-any-link {
+  text-decoration: none;
+  color: black;
+}
+
+a:-webkit-any-link:focus {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+
+.side-home {
+  font-weight: 600;
+  margin-top: 5%;
+  margin-left: 5%;
+}
