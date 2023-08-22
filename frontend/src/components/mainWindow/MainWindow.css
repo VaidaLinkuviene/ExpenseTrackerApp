@@ -1,3 +1,15 @@
-/* .MainWindow {
- 
-} */
+.MainWindow{
+  height: 100vh;
+&.light  {
+  background-color: #DBF3FA;
+  color: #333333;
+  transition: 0.3s;
+  
+}
+
+ &.dark  {
+  background-color: #00004d;
+  color: #ffffff;
+  transition: 0.3s;
+}
+}
