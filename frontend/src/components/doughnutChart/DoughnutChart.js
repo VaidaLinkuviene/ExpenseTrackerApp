@@ -5,7 +5,7 @@ import './DoughnutChart.css'
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = ({ data }) => {
+const DoughnutChart = ({ data, onClick, chartOptions}) => {
   const chartRef = useRef(null);
 
   // useEffect(() => {
@@ -17,6 +17,12 @@ const DoughnutChart = ({ data }) => {
   const options = {
     maintainAspectRatio: false,
     responsive: true,
+    onClick: (_, activeElements) => {
+      if (activeElements.length > 0) {
+        onClick()
+      }
+    },
+    ...chartOptions
   };
 
   return <Doughnut ref={chartRef} data={data} options={options} className="doughnutChart-wrapper"/>;
