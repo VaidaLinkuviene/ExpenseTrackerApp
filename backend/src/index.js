@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import expenseRoute from "../routes/ExpenseRoute.js"
+import incomesRoute from "../routes/IncomesRoute.js"
 import dotenv from 'dotenv';
 import cors from 'cors';
 
@@ -11,6 +12,7 @@ app.use(cors());
 
 
 app.use("/expense", expenseRoute);
+app.use("/incomes", incomesRoute);
 
 
 const connectionToDB = async() => {

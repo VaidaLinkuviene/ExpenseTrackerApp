@@ -10,6 +10,7 @@ import Header from './components/header/Header';
 import PageNotFound from './components/pageNotFound/PageNotFound';
 import SideCanvas from './components/sideCanvas/SideCanvas';
 import ExpensesTable from './components/expensesTable/ExpensesTable';
+import IncomesTable from './components/incomesTable/IncomesTable';
 import axios from "axios";
 
 
@@ -20,6 +21,14 @@ const initialState = {
   data: [],
   error: "",
 };
+
+const firstState = {
+  isLoading: false,
+  data: [],
+  error: "",
+}
+
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -37,8 +46,9 @@ const reducer = (state, action) => {
 function App() {
 
   const [items, dispatch] = useReducer(reducer, initialState);
+  const [elements, dispatch1] = useReducer(reducer, firstState);
 
-  const handleFetch = async () => {
+  const handleFetchExpenses = async () => {
     dispatch({ type: "LOADING" });
     try {
       const response = await axios.get("http://localhost:3001/expense");
@@ -48,15 +58,29 @@ function App() {
     }
   };
 
+
+  const handleFetchIncomes = async () => {
+    dispatch1({ type: "LOADING" });
+    try {
+      const response = await axios.get("http://localhost:3001/incomes");
+      dispatch1({ type: "SUCCESS", payload: response.data });
+    } catch (err) {
+      dispatch1({ type: "FAILURE", payload: err.message });
+    }
+  };
+
   useEffect(() => {
-    handleFetch();
+    
+    handleFetchExpenses();
+    handleFetchIncomes();
+    console.log("aa", items?.data);
   }, []);
 
-  if (items.isLoading) {
+  if (items.isLoading || elements.isLoading) {
     return "Loading...";
   }
 
-  if (items.error) {
+  if (items.error || elements.error) {
     return <p>{items.error}</p>;
   }
   
@@ -67,7 +91,8 @@ function App() {
         <SideCanvas />
         <Routes>
           <Route exact path="/expenseTable" element={<ExpensesTable data={items?.data} />}/>
-          <Route exact path="/" element={<MainWindow data={items?.data} />} />
+          <Route exact path="/incomesTable" element={<IncomesTable data={elements?.data} />}/>
+          <Route exact path="/" element={<MainWindow data={items?.data} incomesData={elements?.data} />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </div>
