@@ -7,21 +7,25 @@ import { useContext } from "react";
 import { ThemeContext } from "../themeProvider/ThemeContext";
 
 
-const MainWindow = ({data}) => {
+const MainWindow = ({data, incomesData}) => {
 
   const { theme } = useContext(ThemeContext);
 
   return (
     <div className={`MainWindow ${theme}`}>
-      <Balance expensesList={data} />
+      <Balance expensesList={data} incomesList={incomesData} />
       <Inputs
         showMainTable={true}
-        // incomesList={incomesList}
+        incomesList={incomesData}
+
         // setIncomesList={setIncomesList}
         expensesList={data}
+
         // setExpensesList={setExpensesList}
+
+        
       />
-      <MainTable data={data} showSearch={true} />
+      <MainTable data={data} showSearch={true} incomesData={incomesData}/>
     </div>
   );
 };

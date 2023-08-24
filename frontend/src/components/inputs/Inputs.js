@@ -3,8 +3,6 @@ import "./Inputs.css";
 import Button from "../../reusableComponents/button/Button";
 import axios from "axios";
 
-
-
 const Inputs = () => {
   const expensesRef = useRef(null);
   const incomesRef = useRef(null);
@@ -13,43 +11,67 @@ const Inputs = () => {
   const [selectedExpensesValue, setSelectedExpensesValue] = useState("Choose");
   const [selectedIncomesValue, setSelectedIncomesValue] = useState("Choose");
   const [expenseInputFields, setExpenseInputFields] = useState({
-    expense: '',
-    type: '',
-    name: '',
-    date: new Date()
-  })  
+    expense: "",
+    type: "",
+    name: "",
+    date: new Date(),
+  });
+  const [incomeInputFields, setIncomeInputFields] = useState({
+    income: "",
+    type: "",
+    name: "",
+    date: new Date(),
+  });
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setExpenseInputFields((pre) => {
-      return {...pre, [name]:value};
+      return { ...pre, [name]: value };
     });
+    setIncomeInputFields((pre) => {
+      console.log(pre)
+      return { ...pre, [name]: value };
+
+    });
+
   };
 
   const handleExpensesItemClick = (value) => {
     setSelectedExpensesValue(value);
     setExpenseInputFields((prevFields) => ({
       ...prevFields,
-      type: value
+      type: value,
     }));
   };
 
   const handleIncomesItemClick = (value) => {
     setSelectedIncomesValue(value);
+    setIncomeInputFields((prevFields) => ({
+      ...prevFields,
+      type: value,
+    }));
   };
 
-  const handleDateChange = (e) => {
+  const handleExpenceDateChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setExpenseInputFields((prevFields) => ({
       ...prevFields,
-      [name]: value
+      [name]: value,
+    }));
+  };
+  const handleIncomeDateChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setIncomeInputFields((prevFields) => ({
+      ...prevFields,
+      [name]: value,
     }));
   };
 
-  const handleAddExpenses = async () => {
 
+  const handleAddExpenses = async () => {
     // const inputNameValue = document.getElementById("name");
     // const dropdownExpense = document.getElementById("expenses-dropdown");
     // const expenseInputValue = document.getElementById("expenses");
@@ -61,14 +83,14 @@ const Inputs = () => {
     // } else {
     //   setIsNameValid(true);
     // }
-  
+
     // if (expenseInputValue.value === '' || expenseInputValue.value == null) {
     //   formIsValid = false;
     //   setIsExpenseValid(false);
     // } else {
     //   setIsExpenseValid(true);
     // }
-  
+
     // if (dropdownExpense.value === '') {
     //   formIsValid = false;
     //   setIsDropdownValid(false);
@@ -80,8 +102,7 @@ const Inputs = () => {
     //   dropdownExpense.classList.remove("validation-error");
     //   expenseInputValue.classList.remove("validation-error");
 
-
-      try {
+    try {
       const postData = await axios.post(
         "http://localhost:3001/expense/sendData",
         expenseInputFields
@@ -90,8 +111,22 @@ const Inputs = () => {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
   // }
+
+  const handleAddIncomes = async () => {
+    try {
+      const postData = await axios.post(
+        "http://localhost:3001/incomes/sendData",
+        incomeInputFields
+        
+      );
+      console.log(incomeInputFields)
+      console.log(postData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -162,7 +197,7 @@ const Inputs = () => {
                 <a
                   className="dropdown-item"
                   href="#"
-                  onClick={() => handleExpensesItemClick( "Medicine")}
+                  onClick={() => handleExpensesItemClick("Medicine")}
                 >
                   Medicine
                 </a>
@@ -198,7 +233,14 @@ const Inputs = () => {
             <label className="date" htmlFor="date">
               Date:
             </label>
-            <input ref={calendarRef} id="date" name="date" type="date" onChange={handleDateChange} value={expenseInputFields.date}></input>
+            <input
+              ref={calendarRef}
+              id="date"
+              name="date"
+              type="date"
+              onChange={handleExpenceDateChange}
+              value={expenseInputFields.date}
+            ></input>
           </div>
 
           <div className="add-button">
@@ -213,9 +255,11 @@ const Inputs = () => {
             </label>
             <input
               id="incomes"
-              name="incomes"
+              name="income"
               type="number"
               placeholder="Enter value"
+              onChange={handleChange}
+              value={incomeInputFields.income}
             />
           </div>
 
@@ -282,11 +326,18 @@ const Inputs = () => {
             <label className="date" htmlFor="date">
               Date:
             </label>
-            <input ref={calendarRef} id="date" name="date" type="date"></input>
+            <input
+              ref={calendarRef}
+              id="date"
+              name="date"
+              type="date"
+              onChange={handleIncomeDateChange}
+              value={incomeInputFields.date}
+            ></input>
           </div>
 
           <div className="add-button">
-            <Button>Add Incomes</Button>
+            <Button handleClick={handleAddIncomes}>Add Incomes</Button>
           </div>
         </form>
       </div>
