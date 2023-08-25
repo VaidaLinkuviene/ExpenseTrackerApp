@@ -1,55 +1,85 @@
-.inputs-wrapper{
-    /* background-color: #e4ebf4; */
-    
+.inputs-wrapper {
+  /* background-color: #e4ebf4; */
 }
 
-.expenses-inputs, .incomes-inputs{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px 50px;
+.expenses-inputs,
+.incomes-inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 50px;
 }
 
-.incomes-label, .expenses-label, .expenses-dropdown, .incomes-dropdown, .name, .date{
-    display: block;
-    font: 1rem 'Fira Sans', sans-serif;
-    min-width: 10rem;
+.incomes-label,
+.expenses-label,
+.expenses-dropdown,
+.incomes-dropdown,
+.name,
+.date {
+  display: block;
+  font: 1rem "Fira Sans", sans-serif;
+  min-width: 10rem;
 }
 
-#expenses, #incomes, #expenses-dropdown, #incomes-dropdown, #name, #date{
-    margin: 0.4rem 0;
-    border-radius: 0.375rem;
-    border-width: 2px;
-    height: 2.5rem;
+#expenses,
+#incomes,
+#expenses-dropdown,
+#incomes-dropdown,
+#name,
+#date {
+  margin: 0.4rem 0;
+  border-radius: 0.375rem;
+  border-width: 2px;
+  height: 2.5rem;
 }
 
-.btn-secondary{
-    --bs-btn-color: #5c636a !important;
-    --bs-btn-bg: #fff !important;
+.btn-secondary {
+  --bs-btn-color: #5c636a !important;
+  --bs-btn-bg: #fff !important;
 }
 
-.dropdown-toggle::after{
-    margin-left: 4.2em !important;
+.dropdown-toggle::after {
+  margin-left: 4.2em !important;
 }
 
-.add-button{
-    height: 30px;
-    --bs-btn-padding-y: 0 !important;
-    margin-top: 20px;
+.date-input {
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 4px;
 }
 
-.all-tables{
-    /* background: url("../../../images/money.avif") no-repeat center center ;
-    background-size: cover; */
-   
+.date-input {
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 4px;
 }
 
-.error-message {
-    color: red;
-    font-size: 12px;
-  }
+.date-input:invalid + .date-picker::before {
+  content: "Select a date on or before today";
+  color: gray;
+  font-size: 14px;
+}
 
-  .validation-error{
-    border: 1px solid red;
-  }
-  
+.date-input:valid + .date-picker::before {
+  content: "Select a date";
+  color: black;
+  font-size: 14px;
+}
+
+.date-input::-webkit-inner-spin-button,
+.date-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.date-input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 5px;
+}
+
+.date-input:disabled {
+  color: lightgray;
+  background-color: #f2f2f2;
+  cursor: not-allowed;
+}

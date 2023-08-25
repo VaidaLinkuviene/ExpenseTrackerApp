@@ -4,27 +4,28 @@ import { useContext } from "react";
 import { ThemeContext } from "../themeProvider/ThemeContext";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
-const element = <FontAwesomeIcon icon={faTrashCan} />;
+import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+
+const elementDelete = <FontAwesomeIcon icon={faTrashCan} />;
+const elementUpdate = <FontAwesomeIcon icon={faPenToSquare} />;
 
 const IncomesTable = ({ data }) => {
-
   const { theme } = useContext(ThemeContext);
 
   const [incomesTable, setIncomesTable] = useState([]);
-    useEffect(() => {
-      setIncomesTable(data);
-      console.log(incomesTable);
-    }, [data]);
+  useEffect(() => {
+    setIncomesTable(data);
+    console.log(incomesTable);
+  }, [data]);
 
-    const handleDelete = async (itemId) => {
-    try{
+  const handleDelete = async (itemId) => {
+    try {
       await axios.delete(`http://localhost:3001/incomes/${itemId}`);
       const updatedData = incomesTable.filter((item) => item._id !== itemId);
       setIncomesTable(updatedData);
-    }catch(err){
-      console.error("Error deleting item:", err)
+    } catch (err) {
+      console.error("Error deleting item:", err);
     }
   };
 
@@ -40,7 +41,7 @@ const IncomesTable = ({ data }) => {
               <th scope="col">Name</th>
               <th scope="col">Value </th>
               <th scope="col">Date </th>
-              <th></th>
+              <th scope="col">Action </th>
             </tr>
           </thead>
           <tbody>
@@ -53,10 +54,16 @@ const IncomesTable = ({ data }) => {
                 <td>{item.date.split("T")[0]}</td>
                 <td>
                   <button
+                    className="update-button"
+                    onClick={() => handleDelete(item._id)}
+                  >
+                    {elementUpdate}
+                  </button>
+                  <button
                     className="delete-button"
                     onClick={() => handleDelete(item._id)}
                   >
-                    {element}
+                    {elementDelete}
                   </button>
                 </td>
               </tr>

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./SearchComponent.css";
 
-const SearchComponent = ({ expensesList, onFilter }) => {
+const SearchComponent = ({ dataList, onFilter }) => {
   const [query, setQuery] = useState("");
 
   const handleSearch = (event) => {
     const searchQuery = event.target.value;
     setQuery(searchQuery);
-    onFilter(searchQuery, expensesList);
+    onFilter(searchQuery, dataList);
   };
 
   

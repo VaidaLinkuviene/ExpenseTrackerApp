@@ -1,12 +1,16 @@
-import React from 'react';
-import './Button.css'
+import React from "react";
+import "./Button.css";
 
-const Button = ({handleClick, children}) => {
+const Button = ({ handleClick, children, disabled }) => {
   return (
-    <button className='reusable-button' onClick={handleClick}>
-        {children}
+  <button
+      className={disabled  ? "disabled-button" : "reusable-button"}
+      onClick={handleClick}
+      type="button"
+    >
+      {children}
     </button>
-  )
-}
+  );
+};
 
-export default React.memo(Button)
+export default React.memo(Button);

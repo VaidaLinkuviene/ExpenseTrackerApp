@@ -17,13 +17,7 @@ const MainWindow = ({data, incomesData}) => {
       <Inputs
         showMainTable={true}
         incomesList={incomesData}
-
-        // setIncomesList={setIncomesList}
         expensesList={data}
-
-        // setExpensesList={setExpensesList}
-
-        
       />
       <MainTable data={data} showSearch={true} incomesData={incomesData}/>
     </div>

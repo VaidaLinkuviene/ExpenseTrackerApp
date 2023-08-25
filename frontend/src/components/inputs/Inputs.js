@@ -1,15 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Inputs.css";
 import Button from "../../reusableComponents/button/Button";
 import axios from "axios";
+import { isAfter } from "date-fns";
 
 const Inputs = () => {
-  const expensesRef = useRef(null);
-  const incomesRef = useRef(null);
-  const calendarRef = useRef(null);
-
+  const [isAddIncomeDisabled, setIsAddIncomeDisabled] = useState(true);
   const [selectedExpensesValue, setSelectedExpensesValue] = useState("Choose");
   const [selectedIncomesValue, setSelectedIncomesValue] = useState("Choose");
+  const tomorrowFormatted = new Date();
+  tomorrowFormatted.setDate(tomorrowFormatted.getDate() + 1);
+  const tomorrow = tomorrowFormatted.toISOString().split("T")[0];
   const [expenseInputFields, setExpenseInputFields] = useState({
     expense: "",
     type: "",
@@ -23,18 +24,34 @@ const Inputs = () => {
     date: new Date(),
   });
 
+  useEffect(() => {
+    const isRequiredFieldsFilled =
+      incomeInputFields.income !== "" &&
+      incomeInputFields.type !== "" &&
+      incomeInputFields.name !== "" &&
+      incomeInputFields.date !== "";
+
+    setIsAddIncomeDisabled(!isRequiredFieldsFilled);
+  }, [incomeInputFields]);
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setExpenseInputFields((pre) => {
-      return { ...pre, [name]: value };
-    });
-    setIncomeInputFields((pre) => {
-      console.log(pre)
-      return { ...pre, [name]: value };
-
-    });
-
+    if (value >= 0) {
+      setExpenseInputFields((pre) => {
+        return { ...pre, [name]: value };
+      });
+      setIncomeInputFields((pre) => {
+        const updatedFields = { ...pre, [name]: value };
+        const isRequiredFieldsFilled =
+          updatedFields.income !== "" &&
+          updatedFields.type !== "" &&
+          updatedFields.name !== "" &&
+          updatedFields.date !== "";
+        setIsAddIncomeDisabled(!isRequiredFieldsFilled); // Disable the button if any field is empty
+        return updatedFields;
+      });
+    }
   };
 
   const handleExpensesItemClick = (value) => {
@@ -47,86 +64,71 @@ const Inputs = () => {
 
   const handleIncomesItemClick = (value) => {
     setSelectedIncomesValue(value);
+
     setIncomeInputFields((prevFields) => ({
       ...prevFields,
       type: value,
     }));
+    const isRequiredFieldsFilled =
+      incomeInputFields.income !== "" &&
+      value !== "" &&
+      incomeInputFields.name !== "" &&
+      incomeInputFields.date !== "";
+
+    setIsAddIncomeDisabled(!isRequiredFieldsFilled);
   };
 
   const handleExpenceDateChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setExpenseInputFields((prevFields) => ({
-      ...prevFields,
-      [name]: value,
-    }));
+    if (!isAfter(new Date(value), new Date())) {
+      setExpenseInputFields((prevFields) => ({
+        ...prevFields,
+        [name]: value,
+      }));
+    }
   };
   const handleIncomeDateChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setIncomeInputFields((prevFields) => ({
-      ...prevFields,
-      [name]: value,
-    }));
+    if (!isAfter(new Date(value), new Date())) {
+      setIncomeInputFields((prevFields) => ({
+        ...prevFields,
+        [name]: value,
+      }));
+    }
   };
 
-
   const handleAddExpenses = async () => {
-    // const inputNameValue = document.getElementById("name");
-    // const dropdownExpense = document.getElementById("expenses-dropdown");
-    // const expenseInputValue = document.getElementById("expenses");
-
-    // let formIsValid = true;
-    // if (inputNameValue.value === '') {
-    //   formIsValid = false;
-    //   setIsNameValid(false);
-    // } else {
-    //   setIsNameValid(true);
-    // }
-
-    // if (expenseInputValue.value === '' || expenseInputValue.value == null) {
-    //   formIsValid = false;
-    //   setIsExpenseValid(false);
-    // } else {
-    //   setIsExpenseValid(true);
-    // }
-
-    // if (dropdownExpense.value === '') {
-    //   formIsValid = false;
-    //   setIsDropdownValid(false);
-    // } else {
-    //   setIsDropdownValid(true);
-    // }
-    //   if(formIsValid){
-    //   inputNameValue.classList.remove("validation-error");
-    //   dropdownExpense.classList.remove("validation-error");
-    //   expenseInputValue.classList.remove("validation-error");
-
     try {
-      const postData = await axios.post(
+      await axios.post(
         "http://localhost:3001/expense/sendData",
         expenseInputFields
       );
-      console.log(postData);
     } catch (err) {
       console.log(err);
     }
   };
-  // }
 
   const handleAddIncomes = async () => {
     try {
-      const postData = await axios.post(
+      await axios.post(
         "http://localhost:3001/incomes/sendData",
         incomeInputFields
-        
       );
-      console.log(incomeInputFields)
-      console.log(postData);
+      setIncomeInputFields({
+        income: "",
+        type: "",
+        name: "",
+        date: new Date(),
+      });
+      setIsAddIncomeDisabled(true);
     } catch (err) {
       console.log(err);
     }
   };
+
+  // const errorMessage = "Fields are required";
 
   return (
     <div>
@@ -154,7 +156,6 @@ const Inputs = () => {
             <button
               placeholder="Choose"
               id="expenses-dropdown"
-              ref={expensesRef}
               className="btn btn-secondary dropdown-toggle expenses-dropdown"
               type="button"
               data-bs-toggle="dropdown"
@@ -234,17 +235,26 @@ const Inputs = () => {
               Date:
             </label>
             <input
-              ref={calendarRef}
               id="date"
               name="date"
               type="date"
+              className="date-input"
               onChange={handleExpenceDateChange}
               value={expenseInputFields.date}
+              max={tomorrow}
             ></input>
           </div>
 
           <div className="add-button">
-            <Button handleClick={handleAddExpenses}>Add Expenses</Button>
+            <Button
+              handleClick={handleAddExpenses}
+              disabled={isAddIncomeDisabled}
+            >
+              Add Expenses
+            </Button>
+            {/* {isAddIncomeDisabled && (
+              <p className="error-message">{errorMessage}</p>
+            )} */}
           </div>
         </form>
 
@@ -269,7 +279,6 @@ const Inputs = () => {
             </label>
             <button
               id="incomes-dropdown"
-              ref={incomesRef}
               className="btn btn-secondary dropdown-toggle incomes-dropdown"
               type="button"
               data-bs-toggle="dropdown"
@@ -281,7 +290,6 @@ const Inputs = () => {
               <li>
                 <a
                   className="dropdown-item"
-                  href="#"
                   onClick={() => handleIncomesItemClick("Salary")}
                 >
                   Salary
@@ -291,7 +299,6 @@ const Inputs = () => {
                 {" "}
                 <a
                   className="dropdown-item"
-                  href="#"
                   onClick={() => handleIncomesItemClick("Gift")}
                 >
                   Gift
@@ -301,7 +308,6 @@ const Inputs = () => {
                 {" "}
                 <a
                   className="dropdown-item"
-                  href="#"
                   onClick={() => handleIncomesItemClick("Winning")}
                 >
                   Winning
@@ -319,6 +325,7 @@ const Inputs = () => {
               name="name"
               type="text"
               placeholder="Enter name"
+              onChange={handleChange}
             ></input>
           </div>
 
@@ -327,17 +334,26 @@ const Inputs = () => {
               Date:
             </label>
             <input
-              ref={calendarRef}
               id="date"
               name="date"
               type="date"
+              className="date-input"
               onChange={handleIncomeDateChange}
               value={incomeInputFields.date}
+              max={tomorrow}
             ></input>
           </div>
 
-          <div className="add-button">
-            <Button handleClick={handleAddIncomes}>Add Incomes</Button>
+          <div>
+            <Button
+              disabled={isAddIncomeDisabled}
+              handleClick={handleAddIncomes}
+            >
+              Add Incomes
+            </Button>
+            {/* {isAddIncomeDisabled && (
+              <p className="error-message">{errorMessage}</p>
+            )} */}
           </div>
         </form>
       </div>

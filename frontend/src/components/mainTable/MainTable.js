@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./MainTable.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import SearchComponent from "../searchComponent/SearchComponent";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-const element = <FontAwesomeIcon icon={faTrashCan} />;
+const elementDelete = <FontAwesomeIcon icon={faTrashCan} />;
+const elementUpdate = <FontAwesomeIcon icon={faPenToSquare} />;
 
 const MainTable = ({ data, showSearch, incomesData }) => {
   const [mainTable, setMainTable] = useState([]);
   const [filteredMainTableList, setFilteredMainTableList] = useState([]);
-  const allData = [...data, ...incomesData];
 
   data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  const handleDelete = async (itemId) => {
+  const allData = [...data, ...incomesData];
+
+  const handleDeleteExpenses = async (itemId) => {
     try {
       await axios.delete(`http://localhost:3001/expense/${itemId}`);
       const updatedData = mainTable.filter((item) => item._id !== itemId);
@@ -27,9 +29,21 @@ const MainTable = ({ data, showSearch, incomesData }) => {
     }
   };
 
+  const handleDeleteIncomes = async (itemId) => {
+    try {
+      await axios.delete(`http://localhost:3001/incomes/${itemId}`);
+      const updatedData = mainTable.filter((item) => item._id !== itemId);
+      setMainTable(updatedData);
+      setFilteredMainTableList(
+        filteredMainTableList.filter((item) => item._id !== itemId)
+      );
+    } catch (err) {
+      console.error("Error deleting item:", err);
+    }
+  };
+
   useEffect(() => {
     setMainTable(allData);
-
     console.log(mainTable);
   }, [data, incomesData]);
 
@@ -40,7 +54,6 @@ const MainTable = ({ data, showSearch, incomesData }) => {
       const filteredData = allData.filter((item) => {
         return item.type?.toLowerCase().includes(searchQuery.toLowerCase());
       });
-
       setFilteredMainTableList(filteredData);
     }
   };
@@ -49,8 +62,8 @@ const MainTable = ({ data, showSearch, incomesData }) => {
     <div className="expenses-table">
       {showSearch && (
         <SearchComponent
-          expensesList={data}
-          incomesList={incomesData}
+          dataList={allData}
+          // incomesList={incomesList}
           onFilter={handleFilterMainTable}
         />
       )}
@@ -62,7 +75,7 @@ const MainTable = ({ data, showSearch, incomesData }) => {
             <th scope="col">Name </th>
             <th scope="col">Value </th>
             <th scope="col">Date </th>
-            <th></th>
+            <th scope="col">Action </th>
           </tr>
         </thead>
         <tbody>
@@ -85,10 +98,16 @@ const MainTable = ({ data, showSearch, incomesData }) => {
                   <td>{item.date.split("T")[0]}</td>
                   <td>
                     <button
-                      className="delete-button"
-                      onClick={() => handleDelete(item._id)}
+                      className="update-button"
+                      onClick={() => handleDeleteExpenses(item._id)}
                     >
-                      {element}
+                      {elementUpdate}
+                    </button>
+                    <button
+                      className="delete-button"
+                      onClick={() => handleDeleteIncomes(item._id)}
+                    >
+                      {elementDelete}
                     </button>
                   </td>
                 </tr>
@@ -110,11 +129,15 @@ const MainTable = ({ data, showSearch, incomesData }) => {
                   <td>{item.expense || item.income}</td>
                   <td>{item.date.split("T")[0]}</td>
                   <td>
+                    <button type="button" className="update-button">
+                      {elementUpdate}
+                    </button>
                     <button
+                      type="button"
                       className="delete-button"
-                      onClick={() => handleDelete(item._id)}
+                      onClick={() => handleDeleteExpenses(item._id)}
                     >
-                      {element}
+                      {elementDelete}
                     </button>
                   </td>
                 </tr>

@@ -12,6 +12,7 @@ import SideCanvas from './components/sideCanvas/SideCanvas';
 import ExpensesTable from './components/expensesTable/ExpensesTable';
 import IncomesTable from './components/incomesTable/IncomesTable';
 import axios from "axios";
+import UpdateExpensesData from './updateData/UpdateExpensesData';
 
 
 library.add();
@@ -27,8 +28,6 @@ const firstState = {
   data: [],
   error: "",
 }
-
-
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -70,7 +69,6 @@ function App() {
   };
 
   useEffect(() => {
-    
     handleFetchExpenses();
     handleFetchIncomes();
     console.log("aa", items?.data);
@@ -95,6 +93,7 @@ function App() {
           <Route exact path="/expenseTable" element={<ExpensesTable data={items?.data} />}/>
           <Route exact path="/incomesTable" element={<IncomesTable data={elements?.data} />}/>
           <Route exact path="/" element={<MainWindow data={items?.data} incomesData={elements?.data} />} />
+                    <Route exact path="/updateExpense" element={<UpdateExpensesData />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </div>
