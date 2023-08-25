@@ -4,9 +4,10 @@ import { useContext } from "react";
 import { ThemeContext } from "../themeProvider/ThemeContext";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-const element = <FontAwesomeIcon icon={faTrashCan} />;
+const elementDelete = <FontAwesomeIcon icon={faTrashCan} />;
+const elementUpdate = <FontAwesomeIcon icon={faPenToSquare} />;
 
 const ExpensesTable = ({ data }) => {
 
@@ -40,7 +41,7 @@ const ExpensesTable = ({ data }) => {
               <th scope="col">Name</th>
               <th scope="col">Value </th>
               <th scope="col">Date </th>
-              <th></th>
+              <th scope="col">Action </th>
             </tr>
           </thead>
           <tbody>
@@ -53,10 +54,16 @@ const ExpensesTable = ({ data }) => {
                 <td>{item.date.split("T")[0]}</td>
                 <td>
                   <button
+                    className="update-button"
+                    onClick={() => handleDelete(item._id)}
+                  >
+                    {elementUpdate}
+                  </button>
+                  <button
                     className="delete-button"
                     onClick={() => handleDelete(item._id)}
                   >
-                    {element}
+                    {elementDelete}
                   </button>
                 </td>
               </tr>
