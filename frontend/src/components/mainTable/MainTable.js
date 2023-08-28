@@ -42,9 +42,16 @@ const MainTable = ({ data, showSearch, incomesData }) => {
     }
   };
 
+  const handleDelete = (itemId, isExpense) => {
+    if (isExpense) {
+      handleDeleteExpenses(itemId);
+    } else {
+      handleDeleteIncomes(itemId);
+    }
+  };
+
   useEffect(() => {
     setMainTable(allData);
-    console.log(mainTable);
   }, [data, incomesData]);
 
   const handleFilterMainTable = (searchQuery, allData) => {
@@ -97,15 +104,10 @@ const MainTable = ({ data, showSearch, incomesData }) => {
                   <td>{item.expense || item.income}</td>
                   <td>{item.date.split("T")[0]}</td>
                   <td>
-                    <button
-                      className="update-button"
-                      onClick={() => handleDeleteExpenses(item._id)}
-                    >
-                      {elementUpdate}
-                    </button>
+                    <button className="update-button">{elementUpdate}</button>
                     <button
                       className="delete-button"
-                      onClick={() => handleDeleteIncomes(item._id)}
+                      onClick={() => handleDelete(item._id, item.expense)}
                     >
                       {elementDelete}
                     </button>
@@ -135,7 +137,7 @@ const MainTable = ({ data, showSearch, incomesData }) => {
                     <button
                       type="button"
                       className="delete-button"
-                      onClick={() => handleDeleteExpenses(item._id)}
+                      onClick={() => handleDelete(item._id, item.expenses)}
                     >
                       {elementDelete}
                     </button>

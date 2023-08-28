@@ -71,8 +71,6 @@ function App() {
   useEffect(() => {
     handleFetchExpenses();
     handleFetchIncomes();
-    console.log("aa", items?.data);
-    console.log("bb", elements?.data);
   }, []);
 
 

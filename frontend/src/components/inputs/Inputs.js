@@ -5,6 +5,7 @@ import axios from "axios";
 import { isAfter } from "date-fns";
 
 const Inputs = () => {
+  const [isAddExpenseDisabled, setIsAddExpenseDisabled] = useState(true);
   const [isAddIncomeDisabled, setIsAddIncomeDisabled] = useState(true);
   const [selectedExpensesValue, setSelectedExpensesValue] = useState("Choose");
   const [selectedIncomesValue, setSelectedIncomesValue] = useState("Choose");
@@ -15,43 +16,62 @@ const Inputs = () => {
     expense: "",
     type: "",
     name: "",
-    date: new Date(),
+    date: '',
   });
   const [incomeInputFields, setIncomeInputFields] = useState({
     income: "",
     type: "",
     name: "",
-    date: new Date(),
+    date: '',
   });
 
   useEffect(() => {
-    const isRequiredFieldsFilled =
+    const isRequiredIncomesFieldsFilled =
       incomeInputFields.income !== "" &&
       incomeInputFields.type !== "" &&
       incomeInputFields.name !== "" &&
       incomeInputFields.date !== "";
 
-    setIsAddIncomeDisabled(!isRequiredFieldsFilled);
+    setIsAddIncomeDisabled(!isRequiredIncomesFieldsFilled);
   }, [incomeInputFields]);
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    const isRequiredExpensesFieldsFilled =
+      expenseInputFields.income !== "" &&
+      expenseInputFields.type !== "" &&
+      expenseInputFields.name !== "" &&
+      expenseInputFields.date !== '';
+    setIsAddExpenseDisabled(!isRequiredExpensesFieldsFilled);
+  }, [expenseInputFields]);
+
+  const handleChangeExpenses = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    if (value >= 0) {
-      setExpenseInputFields((pre) => {
-        return { ...pre, [name]: value };
-      });
-      setIncomeInputFields((pre) => {
-        const updatedFields = { ...pre, [name]: value };
-        const isRequiredFieldsFilled =
-          updatedFields.income !== "" &&
-          updatedFields.type !== "" &&
-          updatedFields.name !== "" &&
-          updatedFields.date !== "";
-        setIsAddIncomeDisabled(!isRequiredFieldsFilled); // Disable the button if any field is empty
-        return updatedFields;
-      });
-    }
+    setExpenseInputFields((prevFields) => {
+      const updatedFields = { ...prevFields, [name]: value };
+      const isRequiredFieldsFilled =
+        updatedFields.expense !== "" &&
+        updatedFields.type !== "" &&
+        updatedFields.name !== "" &&
+        updatedFields.date !== "";
+      setIsAddExpenseDisabled(!isRequiredFieldsFilled);
+      return updatedFields;
+    });
+  };
+
+  const handleChangeIncomes = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setIncomeInputFields((prevFields) => {
+      const updatedFields = { ...prevFields, [name]: value };
+      const isRequiredFieldsFilled =
+        updatedFields.income !== "" &&
+        updatedFields.type !== "" &&
+        updatedFields.name !== "" &&
+        updatedFields.date !== "";
+      setIsAddIncomeDisabled(!isRequiredFieldsFilled);
+      return updatedFields;
+    });
   };
 
   const handleExpensesItemClick = (value) => {
@@ -60,11 +80,17 @@ const Inputs = () => {
       ...prevFields,
       type: value,
     }));
+    const isRequiredFieldsFilled =
+      incomeInputFields.income !== "" &&
+      value !== "" &&
+      incomeInputFields.name !== "" &&
+      incomeInputFields.date !== "";
+
+    setIsAddExpenseDisabled(!isRequiredFieldsFilled);
   };
 
   const handleIncomesItemClick = (value) => {
     setSelectedIncomesValue(value);
-
     setIncomeInputFields((prevFields) => ({
       ...prevFields,
       type: value,
@@ -81,11 +107,18 @@ const Inputs = () => {
   const handleExpenceDateChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    if (!isAfter(new Date(value), new Date())) {
+    const isValidDate = !isNaN(Date.parse(value));
+    if (isValidDate && !isAfter(new Date(value), new Date())) {
       setExpenseInputFields((prevFields) => ({
         ...prevFields,
         [name]: value,
       }));
+      const isRequiredFieldsFilled =
+        expenseInputFields.expense !== "" &&
+        expenseInputFields.type !== "" &&
+        expenseInputFields.name !== "" &&
+        value !== "";
+      setIsAddExpenseDisabled(!isRequiredFieldsFilled);
     }
   };
   const handleIncomeDateChange = (e) => {
@@ -105,6 +138,13 @@ const Inputs = () => {
         "http://localhost:3001/expense/sendData",
         expenseInputFields
       );
+      setExpenseInputFields({
+        income: "",
+        type: "",
+        name: "",
+        date: "",
+      });
+      setIsAddExpenseDisabled(true);
     } catch (err) {
       console.log(err);
     }
@@ -120,7 +160,7 @@ const Inputs = () => {
         income: "",
         type: "",
         name: "",
-        date: new Date(),
+        date: "",
       });
       setIsAddIncomeDisabled(true);
     } catch (err) {
@@ -143,7 +183,7 @@ const Inputs = () => {
               name="expense"
               placeholder="Enter value"
               type="number"
-              onChange={handleChange}
+              onChange={handleChangeExpenses}
               value={expenseInputFields.expense}
               // className={isExpenseValid ? '' : 'validation-error'}
             ></input>
@@ -167,7 +207,6 @@ const Inputs = () => {
               <li>
                 <a
                   className="dropdown-item"
-                  href="#"
                   onClick={() => handleExpensesItemClick("Food")}
                 >
                   Food
@@ -177,7 +216,6 @@ const Inputs = () => {
                 {" "}
                 <a
                   className="dropdown-item"
-                  href="#"
                   onClick={() => handleExpensesItemClick("Clothes")}
                 >
                   Clothes
@@ -187,7 +225,6 @@ const Inputs = () => {
                 {" "}
                 <a
                   className="dropdown-item"
-                  href="#"
                   onClick={() => handleExpensesItemClick("Transport")}
                 >
                   Transport
@@ -197,7 +234,6 @@ const Inputs = () => {
                 {" "}
                 <a
                   className="dropdown-item"
-                  href="#"
                   onClick={() => handleExpensesItemClick("Medicine")}
                 >
                   Medicine
@@ -207,7 +243,6 @@ const Inputs = () => {
                 {" "}
                 <a
                   className="dropdown-item"
-                  href="#"
                   onClick={() => handleExpensesItemClick("Entertainments")}
                 >
                   Entertainments
@@ -221,11 +256,10 @@ const Inputs = () => {
               Name:
             </label>
             <input
-              id="name"
               name="name"
               type="text"
               placeholder="Enter name"
-              onChange={handleChange}
+              onChange={handleChangeExpenses}
               // className={isNameValid ? '' : 'validation-error'}
             ></input>
           </div>
@@ -248,7 +282,7 @@ const Inputs = () => {
           <div className="add-button">
             <Button
               handleClick={handleAddExpenses}
-              disabled={isAddIncomeDisabled}
+              disabled={isAddExpenseDisabled}
             >
               Add Expenses
             </Button>
@@ -268,7 +302,7 @@ const Inputs = () => {
               name="income"
               type="number"
               placeholder="Enter value"
-              onChange={handleChange}
+              onChange={handleChangeIncomes}
               value={incomeInputFields.income}
             />
           </div>
@@ -321,11 +355,10 @@ const Inputs = () => {
               Name:
             </label>
             <input
-              id="name"
               name="name"
               type="text"
               placeholder="Enter name"
-              onChange={handleChange}
+              onChange={handleChangeIncomes}
             ></input>
           </div>
 

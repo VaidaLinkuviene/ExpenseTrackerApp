@@ -16,7 +16,6 @@ const ExpensesTable = ({ data }) => {
   const [expensesTable, setExpensesTable] = useState([]);
     useEffect(() => {
       setExpensesTable(data);
-      console.log(expensesTable);
     }, [data]);
 
     const handleDelete = async (itemId) => {
