@@ -7,6 +7,9 @@ import { useContext } from "react";
 import { ThemeContext } from "../themeProvider/ThemeContext";
 
 
+
+
+
 const MainWindow = ({data, incomesData}) => {
 
   const { theme } = useContext(ThemeContext);
@@ -14,11 +17,14 @@ const MainWindow = ({data, incomesData}) => {
   return (
     <div className={`MainWindow ${theme}`}>
       <Balance expensesList={data} incomesList={incomesData} />
-      <Inputs
+      <div><Inputs
         showMainTable={true}
         incomesList={incomesData}
         expensesList={data}
-      />
+      /> </div>
+      
+
+
       <MainTable data={data} showSearch={true} incomesData={incomesData}/>
     </div>
   );

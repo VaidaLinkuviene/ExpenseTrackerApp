@@ -242,6 +242,7 @@ const Inputs = () => {
               onChange={handleExpenceDateChange}
               value={expenseInputFields.date}
               max={tomorrow}
+              
             ></input>
           </div>
 
@@ -283,6 +284,7 @@ const Inputs = () => {
               type="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
+              style={ {width: '175px'} }
             >
               {selectedIncomesValue}
             </button>
