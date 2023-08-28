@@ -1,23 +1,24 @@
-.balance-value, .incomes-value, .expenses-value{
-    font-size: 45px;
+.balance-value,
+.incomes-value,
+.expenses-value {
+    font-size: 25px;
     font-weight: 600;
-    display: inline-block;
+    /* display: inline-block; */
     /* border: 2px solid black;
     border-radius: 7px; */
-    padding: 10px 15px;
-    background-color: white;
+    /* padding: 10px 15px; */
+    /* background-color: white; */
 }
 
-.balance{
+.balance {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
-    padding: 50px;
-
+    justify-content: space-around;
+    padding: 10px;
 }
 
-.balance-title{
-    font-size: 30px;
+.balance-title {
+    font-size: 18px;
     font-weight: 600;
 }

@@ -28,9 +28,9 @@ const Balance = ({ expensesList, incomesList }) => {
   );
 
   return (
-    <div className="balance">
-      <div className="balance-value" style={{ color: balanceColor }}>
-        {" "}
+    <div >
+      <div className="balance">
+         <div className="balance-value" style={{ color: balanceColor }}>
         <div className="balance-title">Balance: </div> {balance} &euro;
       </div>
       <div className="incomes-value" style={{ color: "green" }}>
@@ -41,7 +41,9 @@ const Balance = ({ expensesList, incomesList }) => {
         {" "}
         <div className="balance-title">Expenses: </div> {totalExpenses} &euro;
       </div>
-      <ChartWrapper expensesList={expensesList} />
+      </div>
+     
+      <ChartWrapper expensesList={expensesList}/>
     </div>
   );
 };
