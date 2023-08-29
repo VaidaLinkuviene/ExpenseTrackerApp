@@ -4,21 +4,27 @@ import SearchComponent from "../searchComponent/SearchComponent";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const elementDelete = <FontAwesomeIcon icon={faTrashCan} />;
 const elementUpdate = <FontAwesomeIcon icon={faPenToSquare} />;
 
-const MainTable = ({ data, showSearch, incomesData }) => {
+const MainTable = ({ data, showSearch, incomesData, tableUpdate }) => {
   const [mainTable, setMainTable] = useState([]);
   const [filteredMainTableList, setFilteredMainTableList] = useState([]);
+  console.log("tableUpdate", tableUpdate);
 
+  const navigate = useNavigate();
   data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const allData = [...data, ...incomesData];
 
-  const handleDeleteExpenses = async (itemId) => {
+  const handleDelete = async (itemId, value) => {
+    const endpoint =
+      value === "expenses" ? `expense/${itemId}` : `incomes/${itemId}`;
+    console.log("handleDelete", itemId, mainTable, endpoint);
     try {
-      await axios.delete(`http://localhost:3001/expense/${itemId}`);
+      await axios.delete(`http://localhost:3001/${endpoint}`);
       const updatedData = mainTable.filter((item) => item._id !== itemId);
       setMainTable(updatedData);
       setFilteredMainTableList(
@@ -26,27 +32,6 @@ const MainTable = ({ data, showSearch, incomesData }) => {
       );
     } catch (err) {
       console.error("Error deleting item:", err);
-    }
-  };
-
-  const handleDeleteIncomes = async (itemId) => {
-    try {
-      await axios.delete(`http://localhost:3001/incomes/${itemId}`);
-      const updatedData = mainTable.filter((item) => item._id !== itemId);
-      setMainTable(updatedData);
-      setFilteredMainTableList(
-        filteredMainTableList.filter((item) => item._id !== itemId)
-      );
-    } catch (err) {
-      console.error("Error deleting item:", err);
-    }
-  };
-
-  const handleDelete = (itemId, isExpense) => {
-    if (isExpense) {
-      handleDeleteExpenses(itemId);
-    } else {
-      handleDeleteIncomes(itemId);
     }
   };
 
@@ -63,6 +48,13 @@ const MainTable = ({ data, showSearch, incomesData }) => {
       });
       setFilteredMainTableList(filteredData);
     }
+  };
+
+  const handleUpdateClick = (item, value) => {
+    console.log("item, value ", value);
+    value === "expenses"
+      ? navigate("/updateExpenses", { state: { item } })
+      : navigate("/updateIncomes", { state: { item } });
   };
 
   return (
@@ -104,10 +96,26 @@ const MainTable = ({ data, showSearch, incomesData }) => {
                   <td>{item.expense || item.income}</td>
                   <td>{item.date.split("T")[0]}</td>
                   <td>
-                    <button className="update-button">{elementUpdate}</button>
+                    <button
+                      type="button"
+                      className="update-button"
+                      onClick={() => {
+                        handleUpdateClick(
+                          item,
+                          item.expense ? "expenses" : "incomes"
+                        );
+                      }}
+                    >
+                      {elementUpdate}
+                    </button>
                     <button
                       className="delete-button"
-                      onClick={() => handleDelete(item._id, item.expense)}
+                      onClick={() =>
+                        handleDelete(
+                          item._id,
+                          item.expense ? "expenses" : "incomes"
+                        )
+                      }
                     >
                       {elementDelete}
                     </button>
@@ -131,13 +139,28 @@ const MainTable = ({ data, showSearch, incomesData }) => {
                   <td>{item.expense || item.income}</td>
                   <td>{item.date.split("T")[0]}</td>
                   <td>
-                    <button type="button" className="update-button">
+                    <button
+                      type="button"
+                      value="expenses"
+                      className="update-button"
+                      onClick={() => {
+                        handleUpdateClick(
+                          item,
+                          item.expense ? "expenses" : "incomes"
+                        );
+                      }}
+                    >
                       {elementUpdate}
                     </button>
                     <button
                       type="button"
                       className="delete-button"
-                      onClick={() => handleDelete(item._id, item.expenses)}
+                      onClick={() =>
+                        handleDelete(
+                          item._id,
+                          item.expense ? "expenses" : "incomes"
+                        )
+                      }
                     >
                       {elementDelete}
                     </button>

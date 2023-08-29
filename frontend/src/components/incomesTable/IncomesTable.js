@@ -6,13 +6,14 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const elementDelete = <FontAwesomeIcon icon={faTrashCan} />;
 const elementUpdate = <FontAwesomeIcon icon={faPenToSquare} />;
 
 const IncomesTable = ({ data }) => {
   const { theme } = useContext(ThemeContext);
-
+  const navigate = useNavigate();
   const [incomesTable, setIncomesTable] = useState([]);
   useEffect(() => {
     setIncomesTable(data);
@@ -26,6 +27,9 @@ const IncomesTable = ({ data }) => {
     } catch (err) {
       console.error("Error deleting item:", err);
     }
+  };
+  const handleUpdateClick = (item) => {
+    navigate("/updateIncomes", { state: { item } });
   };
 
   return (
@@ -53,8 +57,11 @@ const IncomesTable = ({ data }) => {
                 <td>{item.date.split("T")[0]}</td>
                 <td>
                   <button
+                    type="button"
                     className="update-button"
-                    onClick={() => handleDelete(item._id)}
+                    onClick={() => {
+                      handleUpdateClick(item);
+                    }}
                   >
                     {elementUpdate}
                   </button>

@@ -21,12 +21,8 @@ const SideCanvas = () => {
         </div>
       </div>
       <div className="search-input-container">
-      <input
-        type="text"
-        placeholder="Search..."
-      />
-    
-    </div>
+        <input type="text" placeholder="Search..." />
+      </div>
     </div>
   );
 };
