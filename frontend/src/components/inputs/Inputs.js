@@ -16,13 +16,13 @@ const Inputs = () => {
     expense: "",
     type: "",
     name: "",
-    date: '',
+    date: "",
   });
   const [incomeInputFields, setIncomeInputFields] = useState({
     income: "",
     type: "",
     name: "",
-    date: '',
+    date: "",
   });
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Inputs = () => {
       expenseInputFields.income !== "" &&
       expenseInputFields.type !== "" &&
       expenseInputFields.name !== "" &&
-      expenseInputFields.date !== '';
+      expenseInputFields.date !== "";
     setIsAddExpenseDisabled(!isRequiredExpensesFieldsFilled);
   }, [expenseInputFields]);
 
@@ -276,7 +276,6 @@ const Inputs = () => {
               onChange={handleExpenceDateChange}
               value={expenseInputFields.date}
               max={tomorrow}
-              
             ></input>
           </div>
 
@@ -318,7 +317,7 @@ const Inputs = () => {
               type="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              style={ {width: '175px'} }
+              style={{ width: "175px" }}
             >
               {selectedIncomesValue}
             </button>

@@ -3,40 +3,40 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const UpdateExpensesData = () => {
+const UpdateIncomesData = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const item = location?.state?.item;
-  const [expensesId, setExpensesId] = useState("");
-  const [expensesValue, setExpensesValue] = useState("");
-  const [expensesType, setExpensesType] = useState("");
-  const [expensesName, setExpensesName] = useState("");
-  const [expensesDate, setExpensesDate] = useState("");
+  const [incomesId, setIncomesId] = useState("");
+  const [incomesValue, setIncomesValue] = useState("");
+  const [incomesType, setIncomesType] = useState("");
+  const [incomesName, setIncomesName] = useState("");
+  const [incomesDate, setIncomesDate] = useState("");
 
   useEffect(() => {
-    setExpensesId(item?._id);
-    setExpensesValue(item?.expense);
-    setExpensesType(item?.type);
-    setExpensesName(item?.name);
-    setExpensesDate(item?.date.substring(0, 10));
+    setIncomesId(item?._id);
+    setIncomesValue(item?.income);
+    setIncomesType(item?.type);
+    setIncomesName(item?.name);
+    setIncomesDate(item?.date.substring(0, 10));
   }, []);
 
   const handleItemSelection = (type) => {
     console.log("Item Type Selected: ", type);
-    setExpensesType(type);
+    setIncomesType(type);
   };
 
-  const handleUpdateExpenses = async () => {
+  const handleUpdateIncomes = async () => {
     try {
       const updatedData = {
-        expense: expensesValue,
-        type: expensesType,
-        name: expensesName,
-        date: expensesDate,
+        income: incomesValue,
+        type: incomesType,
+        name: incomesName,
+        date: incomesDate,
       };
 
       await axios.put(
-        `http://localhost:3001/expense/${expensesId}`,
+        `http://localhost:3001/incomes/${incomesId}`,
         updatedData
       );
       navigate("/");
@@ -48,43 +48,43 @@ const UpdateExpensesData = () => {
     <div>
       <form className="update-form">
         <div>
-          <label className="expenses-label" htmlFor="expenses">
-            Value of expenses:
+          <label className="incomes-label" htmlFor="incomes">
+            Value of incomes:
           </label>
           <input
-            id="expenses"
-            name="expense"
+            id="incomes"
+            name="income"
             placeholder="Enter value"
             type="number"
-            onChange={(e) => setExpensesValue(e.target.value)}
-            value={expensesValue}
-            // className={isExpenseValid ? '' : 'validation-error'}
+            onChange={(e) => setIncomesValue(e.target.value)}
+            value={incomesValue}
+            // className={isIncomeValid ? '' : 'validation-error'}
           ></input>
         </div>
 
         <div className="dropdown">
-          <label className="expenses-dropdown" htmlFor="expenses-dropdown">
-            Types of expenses:
+          <label className="incomes-dropdown" htmlFor="incomes-dropdown">
+            Types of incomes:
           </label>
           <button
             placeholder="Choose"
-            id="expenses-dropdown"
-            // ref={expensesRef}
-            className="btn btn-secondary dropdown-toggle expenses-dropdown"
+            id="incomes-dropdown"
+            // ref={incomesRef}
+            className="btn btn-secondary dropdown-toggle incomes-dropdown"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {expensesType || "Select Type"}
+            {incomesType || "Select Type"}
           </button>
           <ul className="dropdown-menu">
             <li>
               <a
                 className="dropdown-item"
                 href="#"
-                onClick={() => handleItemSelection("Food")}
+                onClick={() => handleItemSelection("Salary")}
               >
-                Food
+                Salary
               </a>
             </li>
             <li>
@@ -92,9 +92,9 @@ const UpdateExpensesData = () => {
               <a
                 className="dropdown-item"
                 href="#"
-                onClick={() => handleItemSelection("Clothes")}
+                onClick={() => handleItemSelection("Gift")}
               >
-                Clothes
+                Gift
               </a>
             </li>
             <li>
@@ -102,29 +102,9 @@ const UpdateExpensesData = () => {
               <a
                 className="dropdown-item"
                 href="#"
-                onClick={() => handleItemSelection("Transport")}
+                onClick={() => handleItemSelection("Winning")}
               >
-                Transport
-              </a>
-            </li>
-            <li>
-              {" "}
-              <a
-                className="dropdown-item"
-                href="#"
-                onClick={() => handleItemSelection("Medicine")}
-              >
-                Medicine
-              </a>
-            </li>
-            <li>
-              {" "}
-              <a
-                className="dropdown-item"
-                href="#"
-                onClick={() => handleItemSelection("Entertainments")}
-              >
-                Entertainments
+                Winning
               </a>
             </li>
           </ul>
@@ -139,8 +119,8 @@ const UpdateExpensesData = () => {
             name="name"
             type="text"
             placeholder="Enter name"
-            value={expensesName}
-            onChange={(e) => setExpensesName(e.target.value)}
+            value={incomesName}
+            onChange={(e) => setIncomesName(e.target.value)}
           ></input>
         </div>
 
@@ -152,8 +132,8 @@ const UpdateExpensesData = () => {
             id="date"
             name="date"
             type="date"
-            onChange={(e) => setExpensesDate(e.target.value)}
-            value={expensesDate}
+            onChange={(e) => setIncomesDate(e.target.value)}
+            value={incomesDate}
           ></input>
         </div>
 
@@ -161,7 +141,7 @@ const UpdateExpensesData = () => {
           <button
             type="button"
             className="btn btn-secondary"
-            onClick={handleUpdateExpenses}
+            onClick={handleUpdateIncomes}
           >
             Update
           </button>
@@ -174,4 +154,4 @@ const UpdateExpensesData = () => {
   );
 };
 
-export default UpdateExpensesData;
+export default UpdateIncomesData;
