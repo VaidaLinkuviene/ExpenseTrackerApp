@@ -4,7 +4,7 @@ import Button from "../../reusableComponents/button/Button";
 import axios from "axios";
 import { isAfter } from "date-fns";
 
-const Inputs = () => {
+const Inputs = ({ dispatch }) => {
   const [isAddExpenseDisabled, setIsAddExpenseDisabled] = useState(true);
   const [isAddIncomeDisabled, setIsAddIncomeDisabled] = useState(true);
   const [selectedExpensesValue, setSelectedExpensesValue] = useState("Choose");
@@ -16,13 +16,13 @@ const Inputs = () => {
     expense: "",
     type: "",
     name: "",
-    date: '',
+    date: "",
   });
   const [incomeInputFields, setIncomeInputFields] = useState({
     income: "",
     type: "",
     name: "",
-    date: '',
+    date: "",
   });
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Inputs = () => {
       expenseInputFields.income !== "" &&
       expenseInputFields.type !== "" &&
       expenseInputFields.name !== "" &&
-      expenseInputFields.date !== '';
+      expenseInputFields.date !== "";
     setIsAddExpenseDisabled(!isRequiredExpensesFieldsFilled);
   }, [expenseInputFields]);
 
@@ -145,6 +145,7 @@ const Inputs = () => {
         date: "",
       });
       setIsAddExpenseDisabled(true);
+      dispatch({ type: "PUSH", payload: expenseInputFields });
     } catch (err) {
       console.log(err);
     }
@@ -276,7 +277,6 @@ const Inputs = () => {
               onChange={handleExpenceDateChange}
               value={expenseInputFields.date}
               max={tomorrow}
-              
             ></input>
           </div>
 
@@ -318,7 +318,7 @@ const Inputs = () => {
               type="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              style={ {width: '175px'} }
+              style={{ width: "175px" }}
             >
               {selectedIncomesValue}
             </button>
