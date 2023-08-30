@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 // import Button from "../reusableComponents/button/Button";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import './UpdateExpensesData.css'
+import "./UpdateExpensesData.css";
 
-const UpdateExpensesData = () => {
+const UpdateExpensesData = ({ dispatch, onDataUpdated }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const item = location?.state?.item;
+  const returnUrl = location?.state?.returnUrl;
   const [expensesId, setExpensesId] = useState("");
   const [expensesValue, setExpensesValue] = useState("");
   const [expensesType, setExpensesType] = useState("");
@@ -40,15 +41,17 @@ const UpdateExpensesData = () => {
         `http://localhost:3001/expense/${expensesId}`,
         updatedData
       );
-      navigate("/");
+      onDataUpdated();
+      navigate(returnUrl);
+      dispatch({ type: "PUSH", payload: updatedData });
     } catch (err) {
       console.error("Error updating item:", err);
     }
   };
   return (
     <div className="Update-page-wrapper">
-      <form >
-        <div >
+      <form>
+        <div>
           <label className="expenses-label" htmlFor="expenses">
             Value of expenses:
           </label>

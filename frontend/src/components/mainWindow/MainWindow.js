@@ -7,19 +7,21 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../themeProvider/ThemeContext";
 
 
-
-
-
-const MainWindow = ({data, incomesData}) => {
+const MainWindow = ({dispatch, data, incomesData}) => {
 
   const { theme } = useContext(ThemeContext);
       const [tableUpdate, setTableUpdate] = useState(false);
 
   return (
     <div className={`MainWindow ${theme}`}>
-      <Balance expensesList={data} incomesList={incomesData} />
+      <Balance
+        dispatch={dispatch}
+        expensesList={data}
+        incomesList={incomesData}
+      />
       <div>
         <Inputs
+          dispatch={dispatch}
           showMainTable={true}
           incomesList={incomesData}
           expensesList={data}
