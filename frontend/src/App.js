@@ -44,7 +44,7 @@ const reducer = (state, action) => {
 
 function App() {
   const [items, dispatch] = useReducer(reducer, initialState);
-  const [elements, dispatch1] = useReducer(reducer, firstState);
+  const [elements, dispatch1] = useReducer(reducer, firstState);  
 
   const handleFetchExpenses = async () => {
     dispatch({ type: "LOADING" });
