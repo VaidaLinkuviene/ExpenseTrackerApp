@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
 
 .header-wrapper {
-  height: 2rem;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   z-index: 100;
@@ -66,9 +66,15 @@ header {
   background: #a7aab1;
   color: #333333;
   transition: 0.3s;
+  position: sticky;
+  top: 0;
+  z-index: 99;
 }
 
 .header.dark {
   background-color: #292932;
   color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 99;
 }

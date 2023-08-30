@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import Button from "../reusableComponents/button/Button";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import './UpdateExpensesData.css'
 
 const UpdateIncomesData = () => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const UpdateIncomesData = () => {
     }
   };
   return (
-    <div>
+    <div className="Update-page-wrapper">
       <form className="update-form">
         <div>
           <label className="incomes-label" htmlFor="incomes">

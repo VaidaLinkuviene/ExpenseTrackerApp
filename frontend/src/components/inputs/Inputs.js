@@ -256,6 +256,7 @@ const Inputs = () => {
               Name:
             </label>
             <input
+            id="name"
               name="name"
               type="text"
               placeholder="Enter name"
@@ -356,6 +357,7 @@ const Inputs = () => {
               Name:
             </label>
             <input
+            id="name"
               name="name"
               type="text"
               placeholder="Enter name"

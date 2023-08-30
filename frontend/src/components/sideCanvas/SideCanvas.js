@@ -20,9 +20,7 @@ const SideCanvas = () => {
           <Link to="/incomesTable"> Incomes Table</Link>
         </div>
       </div>
-      <div className="search-input-container">
-        <input type="text" placeholder="Search..." />
-      </div>
+     
     </div>
   );
 };
