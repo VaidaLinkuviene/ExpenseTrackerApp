@@ -14,6 +14,7 @@ import IncomesTable from "./components/incomesTable/IncomesTable";
 import axios from "axios";
 import UpdateExpensesData from "./updateData/UpdateExpensesData";
 import UpdateIncomeData from "./updateData/UpdateIncomeData";
+import Footer from "./components/footer/Footer";
 
 library.add();
 
@@ -110,6 +111,7 @@ function App() {
           <Route exact path="/updateIncomes" element={<UpdateIncomeData />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+        <Footer/>
       </div>
     </ThemeProvider>
   );

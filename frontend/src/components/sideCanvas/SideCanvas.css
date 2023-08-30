@@ -10,16 +10,6 @@
   align-items: center;
 }
 
-/* .side-expenses {
-  margin-top: 20%;
-  margin-left: 15%;
-  margin-bottom: 5%;
-}
-
-.side-incomes {
-  margin-left: 15%;
-  margin-bottom: 5%;
-} */
 
 a:-webkit-any-link {
   text-decoration: none;
@@ -37,26 +27,22 @@ a:-webkit-any-link:focus {
   font-weight: 600;
 }
 
-/* .side-home {
-  font-weight: 600;
-  margin-top: 5%;
-  margin-left: 5%;
-} */
-
-.MainWindow {
-  height: 100vh;
-}
-
 .SideCanvas.light {
   background: #a7aab1;
   color: #333333;
   transition: 0.3s;
+  position: sticky;
+  top: 50px;
+  z-index: 98;
 }
 
 .SideCanvas.dark {
   background-color: #292932;
   color: #ffffff;
   transition: 0.3s;
+  position: sticky;
+  top: 50px;
+  z-index: 98;
 }
 
 .SideCanvas.light a {
@@ -80,8 +66,4 @@ justify-content: space-between;
   align-self: center;
 }
 
-input {
-  border: none;
-  padding: 5px;
-  border-radius: 5px;
-}
+

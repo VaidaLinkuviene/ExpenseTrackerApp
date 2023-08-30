@@ -1,10 +1,12 @@
 .expenses-table{
-    display: inline-block;
-    width: 80vw;
-    margin-left: 50px;
-    margin-right: 50px;
+    display: flex;
+    width: 80%;
+    margin: auto;
     padding-bottom: 50px;
     opacity: 0.85;
+    flex-direction: column;
+
+    
 }
 
 .expenses-total{
@@ -19,14 +21,21 @@
     color: red !important;
   }
 
-  .table{
+  .table {
     margin-left: auto;
     margin-right: 50px;
-        --bs-table-bg: #f5fcff !important;
-    &.light{
+}
+
+.table.light {
     --bs-table-color: none !important;
-    }
-  }
+}
+
+:root {
+    --bs-table-bg: #f5fcff !important;
+}
+
+
+
 
   .delete-button{
     color: red;

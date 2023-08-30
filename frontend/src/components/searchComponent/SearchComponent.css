@@ -5,7 +5,7 @@
 }
 
 .search-input{
-  margin-top: 50px;
+  margin-top: 20px;
     margin-bottom: 25px;
     background: transparent url("../../../images/magnifying-glass-solid.svg") no-repeat left;
     width: 200px;
@@ -16,6 +16,7 @@
   background-position: 3% center;
   border-width: 2px;
   height: 35px;
+  background: whitesmoke;
 }
 
 .search-results{
