@@ -5,19 +5,29 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import Pagination from "../pagination/Pagination";
 
 const elementDelete = <FontAwesomeIcon icon={faTrashCan} />;
 const elementUpdate = <FontAwesomeIcon icon={faPenToSquare} />;
 
-const MainTable = ({ data, showSearch, incomesData, tableUpdate }) => {
+const MainTable = ({ data, showSearch, incomesData }) => {
   const [mainTable, setMainTable] = useState([]);
   const [filteredMainTableList, setFilteredMainTableList] = useState([]);
-  console.log("tableUpdate", tableUpdate);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(10);
 
   const navigate = useNavigate();
   data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const allData = [...data, ...incomesData];
+
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const paginatedMainTable = mainTable.slice(
+    indexOfFirstRecord,
+    indexOfLastRecord
+  );
+  const nPages = Math.ceil(allData.length / recordsPerPage);
 
   const handleDelete = async (itemId, value) => {
     const endpoint =
@@ -51,20 +61,16 @@ const MainTable = ({ data, showSearch, incomesData, tableUpdate }) => {
   };
 
   const handleUpdateClick = (item, value) => {
-    console.log("item, value ", value);
+    const returnUrl = "/";
     value === "expenses"
-      ? navigate("/updateExpenses", { state: { item } })
-      : navigate("/updateIncomes", { state: { item } });
+      ? navigate("/updateExpenses", { state: { item, returnUrl } })
+      : navigate("/updateIncomes", { state: { item, returnUrl } });
   };
 
   return (
     <div className="expenses-table">
       {showSearch && (
-        <SearchComponent
-          dataList={allData}
-          // incomesList={incomesList}
-          onFilter={handleFilterMainTable}
-        />
+        <SearchComponent dataList={allData} onFilter={handleFilterMainTable} />
       )}
       <table className="table">
         <thead>
@@ -95,7 +101,7 @@ const MainTable = ({ data, showSearch, incomesData, tableUpdate }) => {
                   <td>{item.name}</td>
                   <td className={`value-cell ${item.expense ? "expense-value" : item.income ? "income-value" : ""}`}
                   > {item.expense ? "-" : item.income ? "+" : ""}{item.expense || item.income}</td>
-                  <td>{item.date.split("T")[0]}</td>
+                  <td>{item.date ? item.date.split("T")[0] : ""}</td>
                   <td>
                     <button
                       type="button"
@@ -123,7 +129,7 @@ const MainTable = ({ data, showSearch, incomesData, tableUpdate }) => {
                   </td>
                 </tr>
               ))
-            : mainTable.map((item, index) => (
+            : paginatedMainTable.map((item, index) => (
                 <tr
                   key={item._id}
                   className={`item ${
@@ -134,7 +140,9 @@ const MainTable = ({ data, showSearch, incomesData, tableUpdate }) => {
                       : ""
                   }`}
                 >
-                  <th scope="row">{index + 1}</th>
+                  <th scope="row">
+                    {index + 1 + (currentPage - 1) * recordsPerPage}
+                  </th>
                   <td>{item.type}</td>
                   <td>{item.name}</td>
                   <td className={`value-cell ${item.expense ? "expense-value" : item.income ? "income-value" : ""}`}>
@@ -171,6 +179,13 @@ const MainTable = ({ data, showSearch, incomesData, tableUpdate }) => {
               ))}
         </tbody>
       </table>
+      <Pagination
+        nPages={nPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        recordsPerPage={recordsPerPage}
+        allData={allData}
+      />
     </div>
   );
 };
