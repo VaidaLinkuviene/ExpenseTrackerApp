@@ -59,3 +59,22 @@
     margin-right: 4px;
   }
   
+
+
+/* For screens with width 1268px to 1024px */
+@media (min-width: 1025px) and (max-width: 1268px) {
+    
+  }
+  
+  /* For screens with width 1023px to 769px */
+  @media (min-width: 770px) and (max-width: 1023px) {
+   
+    
+  }
+  
+  /* For screens with width 768px to 480px */
+  @media (min-width: 481px) and (max-width: 768px) {
+    .table {
+        font-size: 14px;
+    }
+  }
