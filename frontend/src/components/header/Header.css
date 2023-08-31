@@ -1,12 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Borel&family=Pacifico&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Permanent+Marker&display=swap');
 
 .header-wrapper {
   height: 50px;
   display: flex;
   justify-content: space-between;
   z-index: 100;
-  font-family: "Pacifico", cursive;
+  /* font-family: "Pacifico", cursive; */
+  font-family: 'Permanent Marker', cursive;
   align-items: center;
   padding: 10px;
   top: 0;
@@ -17,23 +19,12 @@ header {
   justify-items: space-between;
   align-items: center;
   justify-content: center;
+  
 }
 
 .HeaderContent {
   display: flex;
   gap: 10rem;
-}
-
-.HeaderContent input {
-  background-color: #dcdbda;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  font-size: 12px;
-  padding: 8px;
-  height: 15px;
-  width: 200px;
-  border-radius: 6px;
-  transition: 0.3s;
 }
 
 .searchButton {
@@ -53,11 +44,6 @@ header {
   background-color: white;
 }
 
-.searchInput input:hover {
-  background-color: white;
-  transition: 0.3s;
-}
-
 .header {
   padding: 10px;
 }
@@ -69,6 +55,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 99;
+  height: 6vh;
 }
 
 .header.dark {
@@ -77,4 +64,5 @@ header {
   position: sticky;
   top: 0;
   z-index: 99;
+  height: 6vh;
 }

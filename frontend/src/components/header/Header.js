@@ -11,7 +11,7 @@ const Header = () => {
     <div className={`header ${theme}`}>
       <div className="header-wrapper">
         <div>
-          <h2>My Expense Tracker</h2>{" "}
+          <h2>My Wallet</h2>{" "}
         </div>
 
         <Toggle />

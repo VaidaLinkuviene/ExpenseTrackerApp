@@ -1,10 +1,9 @@
 .MainWindow {
   position: relative;
-  /* height:100vh; */
 }
 
 .MainWindow.light {
-  background-color: #d0d4dd;
+  background-color: #EEEEEE;
 
 
   color: #333333;
@@ -12,9 +11,8 @@
 }
 
 .MainWindow.dark {
-  background-color: #353540;
+  background: linear-gradient(to bottom, rgba(2, 2, 2, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), radial-gradient(at top center, rgba(255, 255, 255, 0.40) 0%, rgba(0, 0, 0, 0.40) 120%) #989898;
+  background-blend-mode: multiply, multiply;
   color: #ffffff;
   transition: 0.3s;
 }
-
-

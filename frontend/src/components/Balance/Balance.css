@@ -3,11 +3,6 @@
 .expenses-value {
     font-size: 25px;
     font-weight: 600;
-    /* display: inline-block; */
-    /* border: 2px solid black;
-    border-radius: 7px; */
-    /* padding: 10px 15px; */
-    /* background-color: white; */
 }
 
 .balance {
@@ -15,7 +10,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
-    gap: 50px;
+    gap: 70px;
     padding: 10px;
 }
 

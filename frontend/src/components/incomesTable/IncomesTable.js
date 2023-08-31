@@ -35,7 +35,7 @@ const IncomesTable = ({ data }) => {
   return (
     <div className={`incomes-table-wrapper ${theme}`}>
       <div className="expences-table">
-        <h4 className="expencesTable-title">Incomes Table</h4>
+        <h4 className="expensesTable-title">Incomes Table</h4>
         <table className="table table-exp">
           <thead>
             <tr>
