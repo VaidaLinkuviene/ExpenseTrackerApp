@@ -98,7 +98,6 @@
   }
 }
 
-
 @media (min-width: 770px) and (max-width: 1023px) {
  
   .input-container-wrapper{
@@ -112,9 +111,7 @@
     padding: auto;
     justify-content: center;
   }
-
 }
-
 
 @media (min-width: 481px) and (max-width: 768px) {
  
@@ -124,13 +121,11 @@
     gap:10px;
     transition: all 0.3s ease;
   }
-
   .input-container-wrapper{
     display: flex;
     padding: auto;
     justify-content: center;
   }
-
 }
 
 @media (max-width: 480px) {

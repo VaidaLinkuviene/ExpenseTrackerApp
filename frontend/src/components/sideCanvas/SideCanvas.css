@@ -9,7 +9,6 @@
   align-items: center;
 }
 
-
 a:-webkit-any-link {
   text-decoration: none;
   color: black;
@@ -22,7 +21,6 @@ a:-webkit-any-link:hover {
 
 a:-webkit-any-link:focus {
   text-decoration: none;
-  /* color: black; */
   font-weight: 600;
 }
 
