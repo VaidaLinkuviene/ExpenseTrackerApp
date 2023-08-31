@@ -12,13 +12,13 @@ const elementDelete = <FontAwesomeIcon icon={faTrashCan} />;
 const elementUpdate = <FontAwesomeIcon icon={faPenToSquare} />;
 
 const ExpensesTable = ({ data }) => {
-  const navigate = useNavigate();
-
   const { theme } = useContext(ThemeContext);
-
+  const navigate = useNavigate();
   const [expensesTable, setExpensesTable] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(10);
+
+    data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   useEffect(() => {
     setExpensesTable(data);

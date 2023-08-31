@@ -139,7 +139,7 @@ const Inputs = ({dispatch}) => {
         expenseInputFields
       );
       setExpenseInputFields({
-        income: "",
+        expense: "",
         type: "",
         name: "",
         date: "",
@@ -157,14 +157,14 @@ const Inputs = ({dispatch}) => {
         "http://localhost:3001/incomes/sendData",
         incomeInputFields
       );
-      setIncomeInputFields({
-        income: "",
-        type: "",
-        name: "",
-        date: "",
-      });
       setIsAddIncomeDisabled(true);
       dispatch({ type: "PUSH", payload: incomeInputFields });
+            setIncomeInputFields({
+              income: "",
+              type: "",
+              name: "",
+              date: "",
+            });
     } catch (err) {
       console.log(err);
     }
@@ -289,16 +289,13 @@ const Inputs = ({dispatch}) => {
             >
               Add Expenses
             </Button>
-            {/* {isAddIncomeDisabled && (
-              <p className="error-message">{errorMessage}</p>
-            )} */}
           </div>
         </form>
 
         <form className="incomes-inputs">
           <div>
             <label className="incomes-label" htmlFor="incomes">
-              Incomes:
+              Value of incomes:
             </label>
             <input
               id="incomes"
@@ -389,9 +386,6 @@ const Inputs = ({dispatch}) => {
             >
               Add Incomes
             </Button>
-            {/* {isAddIncomeDisabled && (
-              <p className="error-message">{errorMessage}</p>
-            )} */}
           </div>
         </form>
       </div>

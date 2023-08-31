@@ -17,9 +17,9 @@ const MainTable = ({ data, showSearch, incomesData }) => {
   const [recordsPerPage] = useState(10);
 
   const navigate = useNavigate();
-  data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const allData = [...data, ...incomesData];
+  allData.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
@@ -88,20 +88,61 @@ const MainTable = ({ data, showSearch, incomesData }) => {
             ? filteredMainTableList.map((item, index) => (
                 <tr
                   key={item._id}
-                  className={`item ${
-                    item.expenses
+                  className={
+                    item.expense
                       ? "pink-row"
                       : item.incomes
                       ? "lightgreen-row"
                       : ""
-                  }`}
+                  }
                 >
                   <th scope="row">{index + 1}</th>
-                  <td>{item.type}</td>
-                  <td>{item.name}</td>
-                  <td className={`value-cell ${item.expense ? "expense-value" : item.income ? "income-value" : ""}`}
-                  > {item.expense ? "-" : item.income ? "+" : ""}{item.expense || item.income}</td>
-                  <td>{item.date ? item.date.split("T")[0] : ""}</td>
+                  <td
+                    className={
+                      item.expense
+                        ? "pink-row"
+                        : item.incomes
+                        ? "lightgreen-row"
+                        : ""
+                    }
+                  >
+                    {item.type}
+                  </td>
+                  <td
+                    className={
+                      item.expense
+                        ? "pink-row"
+                        : item.incomes
+                        ? "lightgreen-row"
+                        : ""
+                    }
+                  >
+                    {item.name}
+                  </td>
+                  <td
+                    className={
+                      item.expense
+                        ? "expense-value"
+                        : item.income
+                        ? "lightgreen-row"
+                        : ""
+                    }
+                  >
+                    {" "}
+                    {item.expense ? "-" : item.income ? "+" : ""}
+                    {item.expense || item.income}
+                  </td>
+                  <td
+                    className={
+                      item.expense
+                        ? "pink-row"
+                        : item.incomes
+                        ? "lightgreen-row"
+                        : ""
+                    }
+                  >
+                    {item.date ? item.date.split("T")[0] : ""}
+                  </td>
                   <td>
                     <button
                       type="button"
@@ -132,23 +173,71 @@ const MainTable = ({ data, showSearch, incomesData }) => {
             : paginatedMainTable.map((item, index) => (
                 <tr
                   key={item._id}
-                  className={`item ${
+                  className={
                     item.expenses
                       ? "pink-row"
                       : item.incomes
                       ? "lightgreen-row"
                       : ""
-                  }`}
+                  }
                 >
                   <th scope="row">
                     {index + 1 + (currentPage - 1) * recordsPerPage}
                   </th>
-                  <td>{item.type}</td>
-                  <td>{item.name}</td>
-                  <td className={`value-cell ${item.expense ? "expense-value" : item.income ? "income-value" : ""}`}>
-                     {item.expense ? "-" : item.income ? "+" : ""}{item.expense || item.income}</td>
-                  <td>{item.date.split("T")[0]}</td>
-                  <td>
+                  <td
+                    className={
+                      item.expense
+                        ? "pink-row"
+                        : item.incomes
+                        ? "lightgreen-row"
+                        : ""
+                    }
+                  >
+                    {item.type}
+                  </td>
+                  <td
+                    className={
+                      item.expense
+                        ? "pink-row"
+                        : item.incomes
+                        ? "lightgreen-row"
+                        : ""
+                    }
+                  >
+                    {item.name}
+                  </td>
+                  <td
+                    className={`value-cell ${
+                      item.expense
+                        ? "expense-value"
+                        : item.income
+                        ? "lightgreen-row"
+                        : ""
+                    }`}
+                  >
+                    {item.expense ? "-" : item.income ? "+" : ""}
+                    {item.expense || item.income}
+                  </td>
+                  <td
+                    className={
+                      item.expense
+                        ? "pink-row"
+                        : item.incomes
+                        ? "lightgreen-row"
+                        : ""
+                    }
+                  >
+                    {item.date.split("T")[0]}
+                  </td>
+                  <td
+                    className={
+                      item.expense
+                        ? "pink-row"
+                        : item.incomes
+                        ? "lightgreen-row"
+                        : ""
+                    }
+                  >
                     <button
                       type="button"
                       value="expenses"

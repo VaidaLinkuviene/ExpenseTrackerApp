@@ -41,17 +41,17 @@
 }
 
 .update-button {
-    color: #588157;
+    color: #588157 !important;
     border: none;
     background: none;
 }
 
 .expense-value {
-    color: red;
+    color: red !important;
   }
   
   .income-value {
-    color: green;
+    color: green !important;
   }
   
   .value-cell::before {
