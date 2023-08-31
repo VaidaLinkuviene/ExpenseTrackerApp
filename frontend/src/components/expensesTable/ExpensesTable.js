@@ -6,6 +6,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import Pagination from "../pagination/Pagination";
 
 const elementDelete = <FontAwesomeIcon icon={faTrashCan} />;
 const elementUpdate = <FontAwesomeIcon icon={faPenToSquare} />;
@@ -16,9 +17,20 @@ const ExpensesTable = ({ data }) => {
   const { theme } = useContext(ThemeContext);
 
   const [expensesTable, setExpensesTable] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(10);
+
   useEffect(() => {
     setExpensesTable(data);
   }, [data]);
+
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const paginatedExpensesTable = expensesTable.slice(
+    indexOfFirstRecord,
+    indexOfLastRecord
+  );
+  const nPages = Math.ceil(data.length / recordsPerPage);
 
   const handleDelete = async (itemId) => {
     try {
@@ -51,9 +63,11 @@ const ExpensesTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {expensesTable.map((item, index) => (
+            {paginatedExpensesTable.map((item, index) => (
               <tr key={item._id} className="item">
-                <th scope="row">{index + 1}</th>
+                <th scope="row">
+                  {index + 1 + (currentPage - 1) * recordsPerPage}
+                </th>
                 <td>{item.type}</td>
                 <td>{item.name}</td>
                 <td>{item.expense}</td>
@@ -80,6 +94,13 @@ const ExpensesTable = ({ data }) => {
           </tbody>
         </table>
       </div>
+      <Pagination
+        nPages={nPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        recordsPerPage={recordsPerPage}
+        allData={data}
+      />
     </div>
   );
 };

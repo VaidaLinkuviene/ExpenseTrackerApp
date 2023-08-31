@@ -1,4 +1,3 @@
-
 import Inputs from "../inputs/Inputs";
 import "./MainWindow.css";
 import Balance from "../Balance/Balance";
@@ -6,11 +5,9 @@ import MainTable from "../mainTable/MainTable";
 import { useContext, useState } from "react";
 import { ThemeContext } from "../themeProvider/ThemeContext";
 
-
-const MainWindow = ({dispatch, data, incomesData}) => {
-
+const MainWindow = ({dispatch, data, incomesData, posts}) => {
   const { theme } = useContext(ThemeContext);
-      const [tableUpdate, setTableUpdate] = useState(false);
+  const [tableUpdate, setTableUpdate] = useState(false);
 
   return (
     <div className={`MainWindow ${theme}`}>
@@ -34,6 +31,7 @@ const MainWindow = ({dispatch, data, incomesData}) => {
         showSearch={true}
         incomesData={incomesData}
         tableUpdate={tableUpdate}
+        posts={posts}
       />
     </div>
   );

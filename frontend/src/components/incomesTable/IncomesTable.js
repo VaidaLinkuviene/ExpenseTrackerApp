@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../themeProvider/ThemeContext";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import Pagination from "../pagination/Pagination";
 import { faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
@@ -15,9 +15,20 @@ const IncomesTable = ({ data }) => {
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const [incomesTable, setIncomesTable] = useState([]);
+   const [currentPage, setCurrentPage] = useState(1);
+   const [recordsPerPage] = useState(10);
+
   useEffect(() => {
     setIncomesTable(data);
   }, [data]);
+
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const paginatedIncomesTable = incomesTable.slice(
+    indexOfFirstRecord,
+    indexOfLastRecord
+  );
+  const nPages = Math.ceil(data.length / recordsPerPage);
 
   const handleDelete = async (itemId) => {
     try {
@@ -49,9 +60,11 @@ const IncomesTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {incomesTable.map((item, index) => (
+            {paginatedIncomesTable.map((item, index) => (
               <tr key={item._id} className="item">
-                <th scope="row">{index + 1}</th>
+                <th scope="row">
+                  {index + 1 + (currentPage - 1) * recordsPerPage}
+                </th>
                 <td>{item.type}</td>
                 <td>{item.name}</td>
                 <td>{item.income}</td>
@@ -78,6 +91,13 @@ const IncomesTable = ({ data }) => {
           </tbody>
         </table>
       </div>
+      <Pagination
+        nPages={nPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        recordsPerPage={recordsPerPage}
+        allData={data}
+      />
     </div>
   );
 };
