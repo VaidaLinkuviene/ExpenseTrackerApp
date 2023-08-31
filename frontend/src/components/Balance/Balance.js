@@ -33,11 +33,11 @@ const Balance = ({ expensesList, incomesList }) => {
          <div className="balance-value" style={{ color: balanceColor }}>
         <div className="balance-title">Balance: </div> {balance} &euro;
       </div>
-      <div className="incomes-value" style={{ color: "green" }}>
+      <div className="incomes-value" style={{ color: "#606c38" }}>
         {" "}
         <div className="balance-title">Incomes: </div> {totalIncomes} &euro;
       </div>
-      <div className="expenses-value" style={{ color: "red" }}>
+      <div className="expenses-value" style={{ color: "#AC4425" }}>
         {" "}
         <div className="balance-title">Expenses: </div> {totalExpenses} &euro;
       </div>

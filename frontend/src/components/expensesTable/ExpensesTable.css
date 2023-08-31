@@ -11,6 +11,7 @@
   background-color: #EEEEEE;
   color: #333333;
   transition: background-color 0.3s, color 0.3s;
+  height: auto;
 }
 
 .expenses-table-wrapper.dark {
@@ -18,6 +19,7 @@
   background-blend-mode: multiply, multiply;
   color: #ffffff;
   transition: background-color 0.3s, color 0.3s;
+  height: auto;
 }
 
 .table-exp {
@@ -33,3 +35,4 @@
   display: flex;
   justify-content: center;
 }
+

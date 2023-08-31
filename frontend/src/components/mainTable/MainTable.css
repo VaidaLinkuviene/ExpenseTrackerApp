@@ -35,13 +35,13 @@
 }
 
 .delete-button {
-    color: red;
+    color: #AC4425;
     border: none;
     background: none;
 }
 
 .update-button {
-    color: green;
+    color: #588157;
     border: none;
     background: none;
 }
