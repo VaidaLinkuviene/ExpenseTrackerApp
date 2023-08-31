@@ -38,3 +38,4 @@ const MainWindow = ({dispatch, data, incomesData, posts}) => {
 };
 
 export default MainWindow;
+
