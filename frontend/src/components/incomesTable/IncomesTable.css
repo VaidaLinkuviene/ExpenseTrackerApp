@@ -20,17 +20,15 @@
   transition: 0.3s;
 }
 
-  
-  .table-exp {
-    margin: auto;
-    width: 80%;
-    /* padding-right: 50px; */
-    --bs-table-bg: #f5fcff !important;
-  }
-  
-  .expensesTable-title {
-    padding-bottom: 15px;
-    padding-top: 50px;
-    display: flex;
-    justify-content: center;
-  }
+.table-exp {
+  margin: auto;
+  width: 80%;
+  --bs-table-bg: #f5fcff !important;
+}
+
+.expensesTable-title {
+  padding-bottom: 15px;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+}
