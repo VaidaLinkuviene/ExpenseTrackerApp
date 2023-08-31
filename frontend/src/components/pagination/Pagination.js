@@ -1,4 +1,5 @@
 import React from 'react'
+import './pagination.css'
 
 const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
   const pageNumbers = [];
@@ -13,7 +14,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
     if (currentPage !== 1) setCurrentPage(currentPage - 1);
   };
   return (
-    <nav>
+    <nav className='pagination'>
       <ul className="pagination justify-content-center">
         <li className="page-item">
           <a className="page-link" onClick={prevPage} >

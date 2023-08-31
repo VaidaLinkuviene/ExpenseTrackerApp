@@ -31,7 +31,7 @@ a:-webkit-any-link:focus {
   color: #333333;
   transition: 0.3s;
   position: sticky;
-  top: 6vh;
+  top: 7vh;
   z-index: 98;
 }
 
@@ -40,7 +40,7 @@ a:-webkit-any-link:focus {
   color: #ffffff;
   transition: 0.3s;
   position: sticky;
-  top: 6vh;
+  top: 7vh;
   z-index: 98;
 }
 
