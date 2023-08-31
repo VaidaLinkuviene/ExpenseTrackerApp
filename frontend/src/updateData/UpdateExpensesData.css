@@ -1,0 +1,30 @@
+.Update-page-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    background-color: grey;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    padding: 50px;
+}
+
+form.div input {
+    border: 1px black solid;
+}
+
+#expenses,
+#incomes,
+#expenses-dropdown,
+#incomes-dropdown,
+#name,
+#date {
+    margin: 0.4rem 0;
+
+    height: 1.5rem;
+    width: 175px;
+    border: 1px solid black;
+}

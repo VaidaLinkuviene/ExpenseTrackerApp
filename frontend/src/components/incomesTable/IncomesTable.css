@@ -1,29 +1,33 @@
 .incomes-table-wrapper {
-    height: 100vh;
-    display: inline-block;
-    margin-right: 0;
-    padding-right: 0;
-    opacity: 0.85;
-    &.light {
-      background-color: #dbf3fa;
-      color: #333333;
-      transition: 0.3s;
-    }
-    &.dark {
-      background-color: #00004d;
-      color: #ffffff;
-      transition: 0.3s;
-    }
-  }
+  height: 100vh;
+  display: inline-block;
+  margin-right: 0;
+  padding-right: 0;
+  opacity: 0.85;
+  width: 100%;
+}
+
+.incomes-table-wrapper.light {
+  background-color: #dbf3fa;
+  color: #333333;
+  transition: 0.3s;
+}
+
+.incomes-table-wrapper.dark {
+  background-color: #00004d;
+  color: #ffffff;
+  transition: 0.3s;
+}
+
   
   .table-exp {
-    width: 80vw;
-    margin-left: auto;
+    margin: auto;
+    width: 80%;
     /* padding-right: 50px; */
     --bs-table-bg: #f5fcff !important;
   }
   
-  .expensesTable-title {
+  .expencesTable-title {
     padding-bottom: 15px;
     padding-top:50px;
   }

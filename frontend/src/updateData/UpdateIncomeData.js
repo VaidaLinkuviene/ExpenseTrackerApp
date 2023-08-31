@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 // import Button from "../reusableComponents/button/Button";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import "./UpdateExpensesData.css";
 
-const UpdateIncomesData = () => {
+const UpdateIncomesData = ({ dispatch, onDataUpdated }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const item = location?.state?.item;
+  const returnUrl = location?.state?.returnUrl;
+
   const [incomesId, setIncomesId] = useState("");
   const [incomesValue, setIncomesValue] = useState("");
   const [incomesType, setIncomesType] = useState("");
@@ -39,13 +42,15 @@ const UpdateIncomesData = () => {
         `http://localhost:3001/incomes/${incomesId}`,
         updatedData
       );
-      navigate("/");
+      onDataUpdated();
+      navigate(returnUrl);
+      dispatch({ type: "PUSH", payload: updatedData });
     } catch (err) {
       console.error("Error updating item:", err);
     }
   };
   return (
-    <div>
+    <div className="Update-page-wrapper">
       <form className="update-form">
         <div>
           <label className="incomes-label" htmlFor="incomes">

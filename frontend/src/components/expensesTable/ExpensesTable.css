@@ -1,13 +1,15 @@
 .expenses-table-wrapper {
-  height: 100vh;
+  height: 100;
   display: inline-block;
   margin-right: 0;
   padding-right: 0;
   opacity: 0.85;
+  width:100%;
   &.light {
     background-color: #dbf3fa;
     color: #333333;
     transition: 0.3s;
+    
   }
   &.dark {
     background-color: #00004d;
@@ -17,8 +19,8 @@
 }
 
 .table-exp {
-  width: 80vw;
-  margin-left: auto;
+  width: 80%;
+  margin: auto;
   /* padding-right: 50px; */
   --bs-table-bg: #f5fcff !important;
 }

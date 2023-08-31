@@ -40,13 +40,14 @@ const IncomesTable = ({ data }) => {
     }
   };
   const handleUpdateClick = (item) => {
-    navigate("/updateIncomes", { state: { item } });
+    const returnUrl = "/incomesTable";
+    navigate("/updateIncomes", { state: { item, returnUrl } });
   };
 
   return (
     <div className={`incomes-table-wrapper ${theme}`}>
-      <div className="incomes-table">
-        <h4 className="incomesTable-title">Incomes Table</h4>
+      <div className="expences-table">
+        <h4 className="expencesTable-title">Incomes Table</h4>
         <table className="table table-exp">
           <thead>
             <tr>
@@ -67,7 +68,7 @@ const IncomesTable = ({ data }) => {
                 <td>{item.type}</td>
                 <td>{item.name}</td>
                 <td>{item.income}</td>
-                <td>{item.date.split("T")[0]}</td>
+                <td>{item.date ? item.date.split("T")[0] : ""}</td>
                 <td>
                   <button
                     type="button"

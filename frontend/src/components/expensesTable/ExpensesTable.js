@@ -43,7 +43,8 @@ const ExpensesTable = ({ data }) => {
   };
 
   const handleUpdateClick = (item) => {
-    navigate("/updateExpenses", { state: { item } });
+    const returnUrl = "/expenseTable";
+    navigate("/updateExpenses", { state: { item, returnUrl } });
   };
 
   return (
@@ -70,7 +71,7 @@ const ExpensesTable = ({ data }) => {
                 <td>{item.type}</td>
                 <td>{item.name}</td>
                 <td>{item.expense}</td>
-                <td>{item.date.split("T")[0]}</td>
+                <td>{item.date ? item.date.split("T")[0] : ""}</td>
                 <td>
                   <button
                     type="button"
