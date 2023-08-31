@@ -1,19 +1,25 @@
 .Update-page-wrapper {
+    height: 82vh;
     display: flex;
     justify-content: center;
     padding: 50px;
-    background-color: grey;
+    background-color: #EEEEEE;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    background-color: aqua;
+    background-color: rgb(176, 196, 177);
     padding: 50px;
+    height: fit-content;
+    border-radius: 5px;
+
+
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 form.div input {
-    border: 1px black solid;
+   
 }
 
 #expenses,
@@ -23,8 +29,9 @@ form.div input {
 #name,
 #date {
     margin: 0.4rem 0;
-
     height: 1.5rem;
     width: 175px;
-    border: 1px solid black;
+    border: none;
+    background-color: rgb(222, 219, 210);
+    border-radius: 5px;
 }

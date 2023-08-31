@@ -99,7 +99,8 @@ const MainTable = ({ data, showSearch, incomesData }) => {
                   <th scope="row">{index + 1}</th>
                   <td>{item.type}</td>
                   <td>{item.name}</td>
-                  <td>{item.expense || item.income}</td>
+                  <td className={`value-cell ${item.expense ? "expense-value" : item.income ? "income-value" : ""}`}
+                  > {item.expense ? "-" : item.income ? "+" : ""}{item.expense || item.income}</td>
                   <td>{item.date ? item.date.split("T")[0] : ""}</td>
                   <td>
                     <button
@@ -144,7 +145,8 @@ const MainTable = ({ data, showSearch, incomesData }) => {
                   </th>
                   <td>{item.type}</td>
                   <td>{item.name}</td>
-                  <td>{item.expense || item.income}</td>
+                  <td className={`value-cell ${item.expense ? "expense-value" : item.income ? "income-value" : ""}`}>
+                     {item.expense ? "-" : item.income ? "+" : ""}{item.expense || item.income}</td>
                   <td>{item.date.split("T")[0]}</td>
                   <td>
                     <button

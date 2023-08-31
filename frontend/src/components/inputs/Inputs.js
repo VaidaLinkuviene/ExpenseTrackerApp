@@ -173,7 +173,7 @@ const Inputs = ({dispatch}) => {
   // const errorMessage = "Fields are required";
 
   return (
-    <div>
+    <div className="input-container-wrapper">
       <div className="inputs-wrapper">
         <form className="expenses-inputs">
           <div>

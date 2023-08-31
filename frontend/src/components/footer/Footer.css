@@ -1,9 +1,39 @@
 .footer {
-    
-    background-color: #333; /* Change this to your desired background color */
-    color: #fff; /* Change this to your desired text color */
     padding: 20px;
     position: sticky;
     bottom: 0;
     z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+  }
+
+  .footer.light {
+    background: #a7aab1;
+    color: #333333;
+    transition: 0.3s;
+    position: sticky;
+    position: sticky;
+    bottom: 0;
+    z-index: 99;
+    height: 6vh;
+  }
+  
+  .footer.dark {
+    background-color: #292932;
+    color: #ffffff;
+    position: sticky;
+    position: sticky;
+    bottom: 0;
+    z-index: 99;
+    height: 6vh;
+  }
+
+  .footer.light a{
+    color: #333333;  
+  }
+  
+  .footer.dark a {
+    color: #ffffff;
   }
