@@ -118,7 +118,7 @@
     transition: all 0.3s ease;
   }
 
-  .input-container-wrapper {
+  .input-container-wrapper{
     display: flex;
     padding: auto;
     justify-content: center;

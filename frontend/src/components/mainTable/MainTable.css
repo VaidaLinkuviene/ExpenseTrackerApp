@@ -47,7 +47,17 @@
 }
 
 .expense-value {
-  color: red !important;
+
+    color: red !important;
+}
+
+.income-value {
+    color: green !important;
+}
+
+.value-cell::before {
+    content: attr(data-sign);
+    margin-right: 4px;
 }
 
 .income-value {

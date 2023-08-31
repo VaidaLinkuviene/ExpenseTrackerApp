@@ -33,7 +33,7 @@
 .table-exp {
   margin: auto;
   width: 80%;
-  /* padding-right: 50px; */
+
   --bs-table-bg: #f5fcff !important;
 }
 
@@ -43,3 +43,4 @@
   display: flex;
   justify-content: center;
 }
+
