@@ -22,15 +22,11 @@ const Balance = ({ expensesList, incomesList }) => {
     () => totalIncomes - totalExpenses,
     [totalExpenses, totalIncomes]
   );
-  const balanceColor = useMemo(
-    () => (balance >= 0 ? "black" : "red"),
-    [balance]
-  );
 
   return (
     <div >
       <div className="balance">
-         <div className="balance-value" style={{ color: balanceColor }}>
+         <div className="balance-value">
         <div className="balance-title">Balance: </div> {balance} &euro;
       </div>
       <div className="incomes-value" style={{ color: "#606c38" }}>
