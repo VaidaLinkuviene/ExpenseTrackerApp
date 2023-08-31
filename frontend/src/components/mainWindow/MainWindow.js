@@ -5,7 +5,7 @@ import MainTable from "../mainTable/MainTable";
 import { useContext, useState } from "react";
 import { ThemeContext } from "../themeProvider/ThemeContext";
 
-const MainWindow = ({dispatch, data, incomesData, posts}) => {
+const MainWindow = ({ dispatch, data, incomesData, posts }) => {
   const { theme } = useContext(ThemeContext);
   const [tableUpdate, setTableUpdate] = useState(false);
 
@@ -38,4 +38,3 @@ const MainWindow = ({dispatch, data, incomesData, posts}) => {
 };
 
 export default MainWindow;
-

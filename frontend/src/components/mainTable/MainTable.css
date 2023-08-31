@@ -1,80 +1,75 @@
 .expenses-table {
-    display: flex;
-    width: 90%;
-    margin: auto;
-    padding-bottom: 50px;
-    opacity: 0.85;
-    flex-direction: column;
-    height: auto;
+  display: flex;
+  width: 90%;
+  margin: auto;
+  padding-bottom: 50px;
+  opacity: 0.85;
+  flex-direction: column;
+  height: auto;
 }
 
 .expenses-total {
-    float: right;
+  float: right;
 }
 
 .lightgreen-row {
-    color: Black !important;
+  color: Black !important;
 }
 
 .pink-row {
-    color: red !important;
+  color: red !important;
 }
 
 .table {
-    margin-left: auto;
-    width: 100%;
-    border-radius: 15px;
+  margin-left: auto;
+  width: 100%;
+  border-radius: 15px;
 }
 
 .table.light {
-    --bs-table-color: none !important;
+  --bs-table-color: none !important;
 }
 
 :root {
-    --bs-table-bg: #f5fcff !important;
+  --bs-table-bg: #f5fcff !important;
 }
 
 .delete-button {
-    color: #AC4425;
-    border: none;
-    background: none;
+  color: #ac4425;
+  border: none;
+  background: none;
 }
 
 .update-button {
-    color: #588157 !important;
-    border: none;
-    background: none;
+  color: #588157 !important;
+  border: none;
+  background: none;
 }
 
 .expense-value {
-    color: red !important;
-  }
-  
-  .income-value {
-    color: green !important;
-  }
-  
-  .value-cell::before {
-    content: attr(data-sign);
-    margin-right: 4px;
-  }
-  
+  color: red !important;
+}
 
+.income-value {
+  color: green !important;
+}
+
+.value-cell::before {
+  content: attr(data-sign);
+  margin-right: 4px;
+}
 
 /* For screens with width 1268px to 1024px */
 @media (min-width: 1025px) and (max-width: 1268px) {
-    
+}
+
+/* For screens with width 1023px to 769px */
+@media (min-width: 770px) and (max-width: 1023px) {
+}
+
+/* For screens with width 768px to 480px */
+@media (min-width: 481px) and (max-width: 768px) {
+  .table {
+    font-size: 14px;
   }
-  
-  /* For screens with width 1023px to 769px */
-  @media (min-width: 770px) and (max-width: 1023px) {
-   
-    
-  }
-  
-  /* For screens with width 768px to 480px */
-  @media (min-width: 481px) and (max-width: 768px) {
-    .table {
-        font-size: 14px;
-    }
-  }
+}

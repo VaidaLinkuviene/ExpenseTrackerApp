@@ -10,7 +10,6 @@ const SearchComponent = ({ dataList, onFilter }) => {
     onFilter(searchQuery, dataList);
   };
 
-  
   return (
     <div className="search-wrapper">
       <input

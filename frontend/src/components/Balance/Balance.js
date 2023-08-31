@@ -3,6 +3,7 @@ import "./Balance.css";
 import ChartWrapper from "../chartWrapper/ChartWrapper";
 
 const Balance = ({ expensesList, incomesList }) => {
+  console.log("expensesList", expensesList);
   const expenses = expensesList.map((item) => {
     return item.expense;
   });
@@ -24,22 +25,22 @@ const Balance = ({ expensesList, incomesList }) => {
   );
 
   return (
-    <div >
+    <div>
       <div className="balance">
-         <div className="balance-value">
-        <div className="balance-title">Balance: </div> {balance} &euro;
+        <div className="balance-value">
+          <div className="balance-title">Balance: </div> {balance} &euro;
+        </div>
+        <div className="incomes-value" style={{ color: "#606c38" }}>
+          {" "}
+          <div className="balance-title">Incomes: </div> {totalIncomes} &euro;
+        </div>
+        <div className="expenses-value" style={{ color: "#AC4425" }}>
+          {" "}
+          <div className="balance-title">Expenses: </div> {totalExpenses} &euro;
+        </div>
       </div>
-      <div className="incomes-value" style={{ color: "#606c38" }}>
-        {" "}
-        <div className="balance-title">Incomes: </div> {totalIncomes} &euro;
-      </div>
-      <div className="expenses-value" style={{ color: "#AC4425" }}>
-        {" "}
-        <div className="balance-title">Expenses: </div> {totalExpenses} &euro;
-      </div>
-      </div>
-     
-      <ChartWrapper expensesList={expensesList}/>
+
+      <ChartWrapper expensesList={expensesList} />
     </div>
   );
 };

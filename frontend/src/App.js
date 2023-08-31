@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer} from "react";
+import React, { useEffect, useReducer } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -51,9 +51,8 @@ const reducer = (state, action) => {
 };
 
 function App() {
-
   const [items, dispatch] = useReducer(reducer, initialState);
-  const [elements, dispatch1] = useReducer(reducer, firstState);  
+  const [elements, dispatch1] = useReducer(reducer, firstState);
 
   const handleFetchExpenses = async () => {
     dispatch({ type: "LOADING" });
@@ -88,13 +87,13 @@ function App() {
     return <p>{items.error}</p>;
   }
 
-    const handleUpdateData = () => {
-      handleFetchExpenses();
-    };
+  const handleUpdateData = () => {
+    handleFetchExpenses();
+  };
 
-        const handleUpdateIncomes = () => {
-          handleFetchIncomes();
-        };
+  const handleUpdateIncomes = () => {
+    handleFetchIncomes();
+  };
 
   return (
     <ThemeProvider>

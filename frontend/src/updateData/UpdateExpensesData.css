@@ -1,25 +1,23 @@
 .Update-page-wrapper {
-    height: 82vh;
-    display: flex;
-    justify-content: center;
-    padding: 50px;
-    background-color: #EEEEEE;
+  height: 82vh;
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  background-color: #eeeeee;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(176, 196, 177);
-    padding: 50px;
-    height: fit-content;
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(176, 196, 177);
+  padding: 50px;
+  height: fit-content;
+  border-radius: 5px;
 
-
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 form.div input {
-   
 }
 
 #expenses,
@@ -28,10 +26,10 @@ form.div input {
 #incomes-dropdown,
 #name,
 #date {
-    margin: 0.4rem 0;
-    height: 1.5rem;
-    width: 175px;
-    border: none;
-    background-color: rgb(222, 219, 210);
-    border-radius: 5px;
+  margin: 0.4rem 0;
+  height: 1.5rem;
+  width: 175px;
+  border: none;
+  background-color: rgb(222, 219, 210);
+  border-radius: 5px;
 }

@@ -18,7 +18,7 @@ const ExpensesTable = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(10);
 
-    data.sort((a, b) => new Date(b.date) - new Date(a.date));
+  data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   useEffect(() => {
     setExpensesTable(data);
