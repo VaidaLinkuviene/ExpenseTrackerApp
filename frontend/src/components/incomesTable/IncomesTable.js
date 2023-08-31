@@ -29,7 +29,8 @@ const IncomesTable = ({ data }) => {
     }
   };
   const handleUpdateClick = (item) => {
-    navigate("/updateIncomes", { state: { item } });
+    const returnUrl = "/incomesTable";
+    navigate("/updateIncomes", { state: { item, returnUrl } });
   };
 
   return (
@@ -53,8 +54,8 @@ const IncomesTable = ({ data }) => {
                 <th scope="row">{index + 1}</th>
                 <td>{item.type}</td>
                 <td>{item.name}</td>
-                <td>{item.expense}</td>
-                <td>{item.date.split("T")[0]}</td>
+                <td>{item.income}</td>
+                <td>{item.date ? item.date.split("T")[0] : ""}</td>
                 <td>
                   <button
                     type="button"

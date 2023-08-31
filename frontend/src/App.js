@@ -36,14 +36,22 @@ const reducer = (state, action) => {
       return { ...state, isLoading: true };
     case "SUCCESS":
       return { ...state, data: action.payload, isLoading: false };
+    case "PUSH":
+      return {
+        ...state,
+        data: [...state.data, action.payload],
+        isLoading: false,
+      };
     case "FAILURE":
       return { ...state, error: action.payload, isLoading: false };
+
     default:
       return state;
   }
 };
 
 function App() {
+
   const [items, dispatch] = useReducer(reducer, initialState);
   const [elements, dispatch1] = useReducer(reducer, firstState);
 
@@ -80,6 +88,14 @@ function App() {
     return <p>{items.error}</p>;
   }
 
+    const handleUpdateData = () => {
+      handleFetchExpenses();
+    };
+
+        const handleUpdateIncomes = () => {
+          handleFetchIncomes();
+        };
+
   return (
     <ThemeProvider>
       <div className="App">
@@ -100,18 +116,36 @@ function App() {
             exact
             path="/"
             element={
-              <MainWindow data={items?.data} incomesData={elements?.data} />
+              <MainWindow
+                dispatch={dispatch}
+                data={items?.data}
+                incomesData={elements?.data}
+              />
             }
           />
           <Route
             exact
             path="/updateExpenses"
-            element={<UpdateExpensesData />}
+            element={
+              <UpdateExpensesData
+                dispatch={dispatch}
+                onDataUpdated={handleUpdateData}
+              />
+            }
           />
-          <Route exact path="/updateIncomes" element={<UpdateIncomeData />} />
+          <Route
+            exact
+            path="/updateIncomes"
+            element={
+              <UpdateIncomeData
+                dispatch={dispatch}
+                onDataUpdated={handleUpdateIncomes}
+              />
+            }
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </div>
     </ThemeProvider>
   );

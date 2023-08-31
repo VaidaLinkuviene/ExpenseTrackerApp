@@ -3,8 +3,8 @@ import "./Button.css";
 
 const Button = ({ handleClick, children, disabled }) => {
   return (
-  <button
-      className={disabled  ? "disabled-button" : "reusable-button"}
+    <button
+      className={disabled ? "disabled-button" : "reusable-button"}
       onClick={handleClick}
       type="button"
     >

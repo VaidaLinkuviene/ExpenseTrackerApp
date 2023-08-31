@@ -16,22 +16,23 @@ const ExpensesTable = ({ data }) => {
   const { theme } = useContext(ThemeContext);
 
   const [expensesTable, setExpensesTable] = useState([]);
-    useEffect(() => {
-      setExpensesTable(data);
-    }, [data]);
+  useEffect(() => {
+    setExpensesTable(data);
+  }, [data]);
 
-    const handleDelete = async (itemId) => {
-    try{
+  const handleDelete = async (itemId) => {
+    try {
       await axios.delete(`http://localhost:3001/expense/${itemId}`);
       const updatedData = expensesTable.filter((item) => item._id !== itemId);
       setExpensesTable(updatedData);
-    }catch(err){
-      console.error("Error deleting item:", err)
+    } catch (err) {
+      console.error("Error deleting item:", err);
     }
   };
 
   const handleUpdateClick = (item) => {
-      navigate("/updateExpenses", { state: { item } })
+    const returnUrl = "/expenseTable";
+    navigate("/updateExpenses", { state: { item, returnUrl } });
   };
 
   return (
@@ -56,15 +57,13 @@ const ExpensesTable = ({ data }) => {
                 <td>{item.type}</td>
                 <td>{item.name}</td>
                 <td>{item.expense}</td>
-                <td>{item.date.split("T")[0]}</td>
+                <td>{item.date ? item.date.split("T")[0] : ""}</td>
                 <td>
                   <button
                     type="button"
                     className="update-button"
                     onClick={() => {
-                      handleUpdateClick(
-                        item,
-                      );
+                      handleUpdateClick(item);
                     }}
                   >
                     {elementUpdate}

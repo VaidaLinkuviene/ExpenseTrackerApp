@@ -51,10 +51,10 @@ const MainTable = ({ data, showSearch, incomesData, tableUpdate }) => {
   };
 
   const handleUpdateClick = (item, value) => {
-    console.log("item, value ", value);
+    const returnUrl = "/";
     value === "expenses"
-      ? navigate("/updateExpenses", { state: { item } })
-      : navigate("/updateIncomes", { state: { item } });
+      ? navigate("/updateExpenses", { state: { item, returnUrl } })
+      : navigate("/updateIncomes", { state: { item, returnUrl } });
   };
 
   return (
@@ -94,7 +94,7 @@ const MainTable = ({ data, showSearch, incomesData, tableUpdate }) => {
                   <td>{item.type}</td>
                   <td>{item.name}</td>
                   <td>{item.expense || item.income}</td>
-                  <td>{item.date.split("T")[0]}</td>
+                  <td>{item.date ? item.date.split("T")[0] : ""}</td>
                   <td>
                     <button
                       type="button"
