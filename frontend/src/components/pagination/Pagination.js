@@ -1,9 +1,9 @@
-import React from 'react'
-import './pagination.css'
+import React from "react";
+import "./pagination.css";
 
 const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
   const pageNumbers = [];
-  for(let i=1; i<=nPages; i++){
+  for (let i = 1; i <= nPages; i++) {
     pageNumbers.push(i);
   }
 
@@ -14,10 +14,10 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
     if (currentPage !== 1) setCurrentPage(currentPage - 1);
   };
   return (
-    <nav className='pagination'>
+    <nav className="pagination">
       <ul className="pagination justify-content-center">
         <li className="page-item">
-          <a className="page-link" onClick={prevPage} >
+          <a className="page-link" onClick={prevPage}>
             Previous
           </a>
         </li>
@@ -44,4 +44,4 @@ const Pagination = ({ nPages, currentPage, setCurrentPage }) => {
   );
 };
 
-export default Pagination
+export default Pagination;

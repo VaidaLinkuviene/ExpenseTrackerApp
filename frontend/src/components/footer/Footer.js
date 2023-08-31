@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import "./Footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,7 +7,6 @@ import {
   faFacebook,
 } from "@fortawesome/free-brands-svg-icons";
 import { ThemeContext } from "../themeProvider/ThemeContext";
-
 
 const Footer = () => {
   const { theme } = useContext(ThemeContext);
@@ -25,6 +24,6 @@ const Footer = () => {
       </a>
     </div>
   );
-}
+};
 
 export default Footer;

@@ -4,7 +4,7 @@ import Button from "../../reusableComponents/button/Button";
 import axios from "axios";
 import { isAfter } from "date-fns";
 
-const Inputs = ({dispatch}) => {
+const Inputs = ({ dispatch }) => {
   const [isAddExpenseDisabled, setIsAddExpenseDisabled] = useState(true);
   const [isAddIncomeDisabled, setIsAddIncomeDisabled] = useState(true);
   const [selectedExpensesValue, setSelectedExpensesValue] = useState("Choose");
@@ -159,12 +159,12 @@ const Inputs = ({dispatch}) => {
       );
       setIsAddIncomeDisabled(true);
       dispatch({ type: "PUSH", payload: incomeInputFields });
-            setIncomeInputFields({
-              income: "",
-              type: "",
-              name: "",
-              date: "",
-            });
+      setIncomeInputFields({
+        income: "",
+        type: "",
+        name: "",
+        date: "",
+      });
     } catch (err) {
       console.log(err);
     }
@@ -258,7 +258,7 @@ const Inputs = ({dispatch}) => {
               Name:
             </label>
             <input
-            id="name"
+              id="name"
               name="name"
               type="text"
               placeholder="Enter name"
@@ -356,7 +356,7 @@ const Inputs = ({dispatch}) => {
               Name:
             </label>
             <input
-            id="name"
+              id="name"
               name="name"
               type="text"
               placeholder="Enter name"

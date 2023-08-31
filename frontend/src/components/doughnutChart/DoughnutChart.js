@@ -1,11 +1,11 @@
-import React, {  useRef } from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import React, { useRef } from "react";
+import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import './DoughnutChart.css'
+import "./DoughnutChart.css";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = ({ data, onClick, chartOptions}) => {
+const DoughnutChart = ({ data, onClick, chartOptions }) => {
   const chartRef = useRef(null);
 
   // useEffect(() => {
@@ -19,13 +19,20 @@ const DoughnutChart = ({ data, onClick, chartOptions}) => {
     responsive: true,
     onClick: (_, activeElements) => {
       if (activeElements.length > 0) {
-        onClick()
+        onClick();
       }
     },
-    ...chartOptions
+    ...chartOptions,
   };
 
-  return <Doughnut ref={chartRef} data={data} options={options} className="doughnutChart-wrapper"/>;
+  return (
+    <Doughnut
+      ref={chartRef}
+      data={data}
+      options={options}
+      className="doughnutChart-wrapper"
+    />
+  );
 };
 
 export default DoughnutChart;

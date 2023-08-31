@@ -1,13 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Borel&family=Pacifico&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Permanent+Marker&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Concert+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Concert+One&family=Permanent+Marker&display=swap");
 
 .header-wrapper {
   height: 50px;
   display: flex;
   justify-content: space-between;
   z-index: 100;
-  font-family: 'Permanent Marker', cursive;
+
+  /* font-family: "Pacifico", cursive; */
+  font-family: "Permanent Marker", cursive;
   align-items: center;
   padding: 10px;
   top: 0;

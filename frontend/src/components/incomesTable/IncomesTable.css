@@ -8,13 +8,23 @@
 }
 
 .incomes-table-wrapper.light {
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   color: #333333;
   transition: 0.3s;
 }
 
 .incomes-table-wrapper.dark {
-  background: linear-gradient(to bottom, rgba(2, 2, 2, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), radial-gradient(at top center, rgba(255, 255, 255, 0.40) 0%, rgba(0, 0, 0, 0.40) 120%) #989898;
+  background: linear-gradient(
+      to bottom,
+      rgba(2, 2, 2, 0.15) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    ),
+    radial-gradient(
+        at top center,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(0, 0, 0, 0.4) 120%
+      )
+      #989898;
   background-blend-mode: multiply, multiply;
   color: #ffffff;
   transition: 0.3s;
@@ -23,6 +33,7 @@
 .table-exp {
   margin: auto;
   width: 80%;
+
   --bs-table-bg: #f5fcff !important;
 }
 
@@ -32,3 +43,4 @@
   display: flex;
   justify-content: center;
 }
+
